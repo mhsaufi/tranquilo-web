@@ -81,10 +81,12 @@
                 $count = sizeof($img_arr);
 
             ?>
-            <div class="row">
+            <div class="row view_property_card">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h4 class="property-header">{{ $model->m_title }}</h4>
-                    <small>posted on {{ $model->d_date }} by <b>{{ $model->name }}</b></small>
+                    <small>posted on {{ $model->d_date }} by <b>{{ $model->name }}</b></small><br><br>
+                    <span style="color: red;"><i class="fa icon-heart-empty"></i></span>
+                    <span style="color:black;"><i class="fa icon-envelope"></i></span>
                     <br><br>
                     <i class="fa icon-phone"></i> <span style="font-size: 20px;">{{ $model->phone_no }}</span><br>
                     <i class="fa icon-briefcase"></i> <span style="font-size: 20px;">{{ $model->b_type_title }}</span><br>
@@ -139,9 +141,10 @@
                     
                 </div>
             </div>
+            <br><br><br>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <br>
+                    
                     <button class="btn-block tranquilo-btn">Apply for this property</button>
                 </div>
             </div>
