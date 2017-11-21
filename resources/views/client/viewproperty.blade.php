@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo | Registration</title>
+    <title>Tranquilo | Home</title>
     <link href="myasset/css/bootstrap.min.css" rel="stylesheet">
     <link href="myasset/css/font-awesome.min.css" rel="stylesheet">
     <link href="myasset/css/prettyPhoto.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                     @guest
                     <li class="active"><a href="{!! route('register') !!}">Sign Up</a></li>
                     @else
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{!! Auth::user()->name !!} <i class="icon-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{!! url('/home') !!}"><i class="fa icon-th-large"></i> Tranquilo Panel</a></li>
@@ -53,7 +53,7 @@
             </div>
         </div>
     </header><!--/header-->
-    @if(Auth::user()->role == 2)
+
     <header class="mini-header-user">
         <div class="row">
             <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
@@ -67,13 +67,12 @@
             </div>
         </div>
     </header>
-    @endif
     <br>
 
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-centered view-a-property">
             <br>
-            <b><a href="{{ url('/home') }}">Property</a></b> > {{ $model->m_title }}<br><br>
+            <b><a href="{{ url('/home') }}">Property</a></b> > {{ $model->m_title }}<br>
             <hr>
             <?php
 
@@ -85,8 +84,13 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h4 class="property-header">{{ $model->m_title }}</h4>
                     <small>posted on {{ $model->d_date }} by <b>{{ $model->name }}</b></small><br><br>
-                    <span style="color: red;"><i class="fa icon-heart-empty"></i></span>
-                    <span style="color:black;"><i class="fa icon-envelope"></i></span>
+                    <span style="margin-right: 10px;color: grey;">
+                        <span id="rate-1"><i class="icon-star icon-2x rate"></i></span>
+                        <span id="rate-2"><i class="icon-star icon-2x rate"></i></span>
+                        <span id="rate-3"><i class="icon-star icon-2x rate"></i></span>
+                        <span id="rate-4"><i class="icon-star icon-2x rate"></i></span>
+                        <span id="rate-5"><i class="icon-star icon-2x rate"></i></span>
+                    </span>
                     <br><br>
                     <i class="fa icon-phone"></i> <span style="font-size: 20px;">{{ $model->phone_no }}</span><br>
                     <i class="fa icon-briefcase"></i> <span style="font-size: 20px;">{{ $model->b_type_title }}</span><br>
@@ -143,9 +147,8 @@
             </div>
             <br><br><br>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    
-                    <button class="btn-block tranquilo-btn">Apply for this property</button>
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <button class="btn-block tranquilo-btn" style="margin-top: 30px!important;" onclick="applyProperty('{{ $model->d_id }}','{{ url('/applyproperty') }}')">Apply for this property</button>
                 </div>
             </div>
         </div>
@@ -157,9 +160,17 @@
     <script src="myasset/js/bootstrap.min.js"></script>
     <script src="myasset/js/jquery.prettyPhoto.js"></script>
     <script src="myasset/js/main.js"></script>
+    <script src="myasset/js/tranquilo-rate.js"></script>
     <script>
         function goToAddProperty(url){
             window.location.replace(url);
+        }
+        function applyProperty(d_id,url){
+
+            url = url + '?d=' + d_id;
+
+            window.location.replace(url);
+
         }
     </script>
 </body>

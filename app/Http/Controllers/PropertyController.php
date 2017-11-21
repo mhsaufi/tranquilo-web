@@ -9,6 +9,14 @@ use Carbon\Carbon;
 
 class PropertyController extends Controller
 {
+    public function updateView($model_id,$m_view){
+
+        $new_view = $m_view + 1;
+
+        Db::table('tranquilo_model')->where('m_id',$model_id)->update(['m_view'=>$new_view]);
+
+    }
+
     public function uploadGalleries(Request $request){
 
     	$files = $request->file('file');
@@ -130,6 +138,8 @@ class PropertyController extends Controller
             $created = Carbon::parse($model->d_date);
             $model->d_date = $created->toFormattedDateString();
 
+            $this->updateView($model_id,$model->m_view);
+
             $data['model'] = $model;
 
             return view ('client.viewproperty',$data);
@@ -148,10 +158,13 @@ class PropertyController extends Controller
             $created = Carbon::parse($model->d_date);
             $model->d_date = $created->toFormattedDateString();
 
+            $this->updateView($model_id,$model->m_view);
+
             $data['model'] = $model;
 
             return view ('landlord.viewproperty',$data);
 
         }
     }
+
 }

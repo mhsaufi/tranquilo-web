@@ -25,11 +25,14 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/addproperty',		'HomeController@addProperty');
 		Route::post('/upload_gallery', 	'PropertyController@uploadGalleries');
 		Route::post('/checkout',		'PropertyController@checkOutDeal');
+
+		Route::post('/apply',			'ApplicationController@apply');
 		
 });
 
-Route::get('/viewmodel',	'PropertyController@viewProperty');
-Route::get('/viewmodelc',	'PropertyController@viewProperty');
+Route::get('/viewmodel',		'PropertyController@viewProperty');
+Route::get('/viewmodelc',		'PropertyController@viewProperty');
+Route::get('/applyproperty',	'ApplicationController@applyProperty');
 
 Route::get('galleries/{id}/{filename}', function ($id,$filename)
 {

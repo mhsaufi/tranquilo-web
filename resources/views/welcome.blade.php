@@ -37,10 +37,10 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="{!! url('/') !!}">Home</a></li>
+                    <li class="active"><a href="{!! url('/') !!}"><i class="fa icon-home"></i>Home</a></li>
+                    <li><a href="services.html">Properties</a></li>
                     <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Contact</a></li>
+                    <li><a href="portfolio.html"><i class="fa icon-phone"></i>Contact</a></li>
                     @guest
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Client Area <i class="icon-angle-down"></i></a>

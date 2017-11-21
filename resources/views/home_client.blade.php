@@ -40,7 +40,7 @@
                     @guest
                     <li class="active"><a href="{!! route('register') !!}">Sign Up</a></li>
                     @else
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{!! Auth::user()->name !!} <i class="icon-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{!! url('/home') !!}"><i class="fa icon-th-large"></i> Tranquilo Panel</a></li>
@@ -60,8 +60,8 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="#" class="active">Property</a>
-                <a href="#">Rental</a>
+                <a href="{!! url('/home') !!}" class="active">Property</a>
+                <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="#">Favourite</a>
                 <a href="#">History</a>
             </div>
@@ -121,14 +121,23 @@
                                 <img src="{{ url('/galleries/'.$model->m_id.'/'.$img_arr[0]) }}" width="100%" class="img-thumbnail">
                                 
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-12 text-left">
+                            <div class="col-lg-7 col-md-7 col-sm-12 text-left">
                                 <h4  onclick="viewModel('{{ $model->m_id }}','{{ url('/viewmodelc') }}')" style="cursor: pointer;">{{ $model->m_title }}</h4>
                                 <p><span style="opacity: 0.5;">Deal : </span>RM{{ $str_d_value }}, {{ $model->h_type_title }}</p>
                                 <b>{{ $model->state_title }}</b>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-12 text-left">
+                            <div class="col-lg-3 col-md-3 col-sm-12 text-right">
                                 <i class="fa icon-heart-empty"></i>
-                                <i class="fa icon-envelope"></i>
+                                <i class="fa icon-envelope"></i><br><br>
+                                <span style="margin-right: 10px;color: orange;">
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                </span>
+                                <br><br><br>
+                                <span style="margin-right: 10px;opacity: 0.8;"><em>{!! $model->m_view !!} views</em></span>
                             </div>
                         </div>
                         <br>
