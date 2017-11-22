@@ -17,6 +17,38 @@ class PropertyController extends Controller
 
     }
 
+    public function updateRating($model_id){
+
+        $all_rating = Db::table('tranquilo_rating')->get();
+        $all_rating_count = Db::table('tranquilo_rating')->count();
+
+        $total_rate = 0;
+        $total_rate_by = 0;
+
+        if($all_rating_count <> 0){
+
+
+            foreach($all_rating as $rating){
+
+            $arr_rated_model = explode("|", $rating->rated_model);
+            $arr_rated_value = explode("|", $rating->avg_rated);
+
+            if(in_array($model_id,$arr_rated_model)){
+
+                $pos = array_search($model_id,$arr_rated_model);
+                $rate_value = $arr_rated_value[$pos];
+                $total_rate += $rate_value;
+                $total_rate_by++;
+            }
+        }
+
+        }
+
+        $latest_rating = $total_rate/$total_rate_by;
+
+        Db::table('tranquilo_model')->where('m_id',$model_id)->update(['m_rate_value'=>$latest_rating,'m_rate_by'=>$total_rate_by]);
+    }
+
     public function uploadGalleries(Request $request){
 
     	$files = $request->file('file');
@@ -135,6 +167,35 @@ class PropertyController extends Controller
                     ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
                     ->first();
 
+            // checked rated
+
+            $rate_record = Db::table('tranquilo_rating')->where('user_id',Auth::id())->first();
+            $rate_record_count = Db::table('tranquilo_rating')->where('user_id',Auth::id())->count();
+
+            if($rate_record_count <> 0){
+
+                $arr_rated_model = explode("|", $rate_record->rated_model);
+                $arr_rated_value = explode("|", $rate_record->avg_rated);
+
+                if(in_array($model_id,$arr_rated_model)){
+
+                    $pos = array_search($model_id,$arr_rated_model);
+
+                    $data['model_rated'] = true;
+                    $data['rated_value'] = $arr_rated_value[$pos];
+
+                }else{
+
+                    $data['model_rated'] = false;
+
+                }
+            }else{
+
+                $data['model_rated'] = false;
+
+            }
+            
+
             $created = Carbon::parse($model->d_date);
             $model->d_date = $created->toFormattedDateString();
 
@@ -165,6 +226,63 @@ class PropertyController extends Controller
             return view ('landlord.viewproperty',$data);
 
         }
+    }
+
+    public function rateProperty(Request $request){
+
+        $rate_value = $request->input('rate');
+        $rate_user = $request->input('user');
+        $rate_model = $request->input('model');
+
+        $rate_exist = Db::table('tranquilo_rating')->where('user_id',$rate_user)->count();
+
+        if($rate_exist <> 0){
+
+            $rate_record = Db::table('tranquilo_rating')->where('user_id',$rate_user)->first();
+
+            $model_string = $rate_record->rated_model;
+            $old_rate_value = $rate_record->avg_rated;
+
+            $arr_rated_model = explode("|",$model_string);
+
+            if(!in_array($rate_model,$arr_rated_model)){
+
+                $new_model_string = $model_string."|".$rate_model;
+                $new_rate_value = $old_rate_value."|".$rate_value;
+
+                Db::table('tranquilo_rating')->where('user_id',$rate_user)->update(['rated_model'=>$new_model_string,'avg_rated'=>$new_rate_value]);
+
+                $this->updateRating($rate_model);
+            }
+
+        }else{
+
+            Db::table('tranquilo_rating')->insert(['user_id'=>$rate_user,'rated_model'=>$rate_model,'avg_rated'=>$rate_value]);
+        }
+    }
+
+    public function bookmarkDeal(Request $request){
+
+        $deal_id = $request->input('deal');
+        $user_id = Auth::id();
+
+        // check bookmark
+        $bookmark_count = Db::table('tranquilo_bookmark')->where('bookmark_user',$user_id)->count();
+
+        if($bookmark_count <> 0){
+
+            $bookmark_record = Db::table('tranquilo_bookmark')->where('bookmark_user',$user_id)->first();
+
+            $new_bookmark_deal = $bookmark_record->bookmark_deal."|".$deal_id;
+
+            Db::table('tranquilo_bookmark')->where('bookmark_user',$user_id)->update(['bookmark_deal'=>$new_bookmark_deal]);
+
+        }else{
+
+            Db::table('tranquilo_bookmark')->insert(['bookmark_user'=>$user_id,'bookmark_deal'=>$deal_id]);
+
+        }
+
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as Db;
 
 class PublicController extends Controller
@@ -23,5 +24,25 @@ class PublicController extends Controller
     	$data['models'] = $model;
 
     	return view('welcome',$data);
+    }
+
+    public function about(){
+
+        return view('aboutus');
+    }
+
+    public function contact(){
+
+        return view('contactus');
+    }
+
+    public function property(){
+
+        if(Auth::check()) {
+
+            return redirect('/home');
+
+        }
+
     }
 }

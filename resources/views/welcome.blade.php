@@ -6,20 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Tranquilo Property</title>
-    <link href="myasset/css/bootstrap.min.css" rel="stylesheet">
-    <link href="myasset/css/font-awesome.min.css" rel="stylesheet">
-    <link href="myasset/css/prettyPhoto.css" rel="stylesheet">
-    <link href="myasset/css/animate.css" rel="stylesheet">
-    <link href="myasset/css/main.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="{!! asset('myasset/images/tranquilo_nano.png') !!}">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="myasset/images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="myasset/images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="myasset/images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="myasset/images/ico/apple-touch-icon-57-precomposed.png">
+    
+    @include('layouts.tranquilo-core-sheets')
+
 </head><!--/head-->
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
@@ -38,9 +27,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="{!! url('/') !!}"><i class="fa icon-home"></i>Home</a></li>
-                    <li><a href="services.html">Properties</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="portfolio.html"><i class="fa icon-phone"></i>Contact</a></li>
+                    <li><a href="{!! url('/property') !!}">Properties</a></li>
+                    <li><a href="{!! url('/aboutus') !!}">About Us</a></li>
+                    <li><a href="{!! url('/contactus') !!}"><i class="fa icon-phone"></i>Contact</a></li>
                     @guest
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Client Area <i class="icon-angle-down"></i></a>
@@ -158,7 +147,7 @@
         </div>
     </section><!--/#services-->
 
-    <section id="recent-works">
+    <!-- <section id="recent-works">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -264,7 +253,7 @@
                 </div>
             </div><!--/.row-->
         </div>
-    </section><!--/#recent-works-->
+    </section> --><!--/#recent-works-->
 
     <section id="testimonial" class="alizarin">
         <div class="container">
@@ -383,24 +372,7 @@
         </div>
     </section><!--/#bottom-->
 
-    <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li><!--#gototop-->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
+    @include('layouts.tranquilo-footer')
 
     <script src="myasset/js/jquery.js"></script>
     <script src="myasset/js/bootstrap.min.js"></script>

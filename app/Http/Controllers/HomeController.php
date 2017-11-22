@@ -27,17 +27,27 @@ class HomeController extends Controller
     {
         if(Auth::user()->role == 3){
 
-            $model = Db::table('tranquilo_model')
-                ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
-                ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
-                ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
-                ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
-                ->orderBy('tranquilo_deal.d_date','desc')
-                ->paginate(3);
+            $query =  "
+            SELECT * FROM tranquilo_model 
+            INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
+            INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id 
+            INNER JOIN tranquilo_business_type ON tranquilo_model.m_b_type = tranquilo_business_type.b_type_id";
+
+            $model_in = Db::raw('('.$query.') as model');
+
+            $model = Db::table('tranquilo_deal')
+                    ->join($model_in,'tranquilo_deal.d_model','=','model.m_id')
+                    ->orderBy('tranquilo_deal.d_date','desc')
+                    ->paginate(4);
 
             $state = Db::table('tranquilo_state')->orderBy('state_title')->get();
             $h_type = Db::table('tranquilo_house_type')->orderBy('h_type_title')->get();
 
+            $bookmark_record = Db::table('tranquilo_bookmark')->where('bookmark_user',Auth::id())->first();
+
+            $bookmarked = explode("|", $bookmark_record->bookmark_deal);
+
+            $data['bookmarked'] = $bookmarked;
             $data['models'] = $model;
             $data['state'] = $state;
             $data['h_type'] = $h_type;
@@ -48,7 +58,6 @@ class HomeController extends Controller
 
             $model = Db::table('tranquilo_model')
                 ->where('m_owner',Auth::id())
-                ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
                 ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
                 ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
                 ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
@@ -71,5 +80,42 @@ class HomeController extends Controller
         $data['state'] = $state;
 
         return view ('landlord.addpropertyform', $data);
+    }
+
+    public function myBookmark(){
+
+        $user_id = Auth::id();
+
+        $bookmark_count = Db::table('tranquilo_bookmark')->where('bookmark_user',$user_id)->count();
+
+        if($bookmark_count <> 0){
+
+            $bookmark_info = Db::table('tranquilo_bookmark')->where('bookmark_user',$user_id)->first();
+
+            $arr_bookmark_deal = explode("|",$bookmark_info->bookmark_deal);
+
+            $query =  "
+            SELECT * FROM tranquilo_model 
+            INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
+            INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id 
+            INNER JOIN tranquilo_business_type ON tranquilo_model.m_b_type = tranquilo_business_type.b_type_id";
+
+            $model_in = Db::raw('('.$query.') as model');
+
+            $deals = Db::table('tranquilo_deal')
+                    ->join($model_in,'tranquilo_deal.d_model','=','model.m_id')
+                    ->whereIn('d_id',$arr_bookmark_deal)
+                    ->orderBy('tranquilo_deal.d_date','desc')
+                    ->get();
+
+            $data['deals'] = $deals;
+
+            $bookmark_count = sizeof($arr_bookmark_deal);
+
+        }
+
+        $data['bookmark_count'] = $bookmark_count;
+
+        return view('client.bookmarkc', $data);
     }
 }

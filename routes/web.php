@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/',		'PublicController@index');
+Route::get('/',					'PublicController@index');
+Route::get('/aboutus',			'PublicController@about');
+Route::get('/contactus',		'PublicController@contact');
+Route::get('/property',			'PublicController@property');
+// Route::get('/',		'PublicController@index');
 
 Auth::routes();
 
@@ -27,12 +31,22 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::post('/checkout',		'PropertyController@checkOutDeal');
 
 		Route::post('/apply',			'ApplicationController@apply');
+
+		Route::get('/viewmodel',		'PropertyController@viewProperty');
+		Route::get('/viewmodelc',		'PropertyController@viewProperty');
+		Route::get('/applyproperty',	'ApplicationController@applyProperty');
+		Route::post('/rateproperty',	'PropertyController@rateProperty');
+		Route::post('/bookmarkdeal',	'PropertyController@bookmarkDeal');
+
+		Route::get('/mybookmark',		'HomeController@myBookmark');
+
+		Route::get('/myapplication',	'ApplicationController@index');
+
+		Route::get('/board',			'ApplicationController@boardLandlord');
+		Route::get('/viewapplication',	'ApplicationController@viewApplication');
 		
 });
 
-Route::get('/viewmodel',		'PropertyController@viewProperty');
-Route::get('/viewmodelc',		'PropertyController@viewProperty');
-Route::get('/applyproperty',	'ApplicationController@applyProperty');
 
 Route::get('galleries/{id}/{filename}', function ($id,$filename)
 {
