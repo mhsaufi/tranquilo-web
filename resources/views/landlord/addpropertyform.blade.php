@@ -36,9 +36,9 @@ function generateKey($length)
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="#" class="active">Property</a>
-                <a href="#">Rental</a>
-                <a href="#">Favourite</a>
+                <a href="{!! url('/home') !!}" class="active">Property</a>
+                <a href="{!! url('/board') !!}">Applications</a>
+                <a href="{!! url('/dealboard') !!}">Deals</a>
                 <a href="#">History</a>
             </div>
         </div>
@@ -79,19 +79,6 @@ function generateKey($length)
                     <br>
                     <label for="m_price">Property Value</label>
                     <input type="number" name="price" class="form-control" id="m_price" />
-                    <br>
-
-                    <label for="b_type">For</label><br>
-                    <select name="b_type" class="form-control" id="b_type">
-                        <option value="0" selected="selected">not selected</option>
-                        @foreach($b_type as $b)
-                            <option value={!! $b->b_type_id !!}>{!! $b->b_type_title !!}</option>
-                        @endforeach
-                    </select>
-
-                    <br>
-                    <label for="deal">Deal Price</label>
-                    <input type="number" name="deal" class="form-control" id="deal" required/>
                     <br>
                     <label for="address">Property Location/ Address</label><br>
                     <textarea name="address" rows="3" class="form-control" id="address"></textarea>
@@ -146,12 +133,10 @@ function generateKey($length)
       </div>
     </div>
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
+    @include('layouts.tranquilo-core-scripts')
+
     <script src="myasset/dropzone/dropzone.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
     <script src="myasset/summernote/summernote.js"></script>
-    <script src="myasset/js/main.js"></script>
     <script>
         $(document).ready(function(){
             // to do when tranquilo page load
@@ -205,8 +190,6 @@ function generateKey($length)
             var year = $('#year').val();
             var m_type = $('#m_type :selected').val();
             var m_price = $('#m_price').val();
-            var b_type = $('#b_type :selected').val();
-            var deal = $('#deal').val();
             var address = $('#address').val();
             var token = '{!! csrf_field() !!}';
             var err_msg = '';
@@ -237,18 +220,6 @@ function generateKey($length)
                 $('#error-modal').modal('toggle');
                 $('#error-message').html(err_msg);
             }
-            else if(b_type == '' || b_type == 0)
-            {
-                err_msg = 'Your property value price is not given';
-                $('#error-modal').modal('toggle');
-                $('#error-message').html(err_msg);
-            }
-            else if(deal == '' || deal == 0)
-            {
-                err_msg = 'Value for your deal is not given';
-                $('#error-modal').modal('toggle');
-                $('#error-message').html(err_msg);
-            }
             else if(address == '' || address == null)
             {
                 err_msg = 'Your property location is not given';
@@ -266,8 +237,6 @@ function generateKey($length)
                         year:year,
                         m_type:m_type,
                         m_price:m_price,
-                        b_type:b_type,
-                        deal:deal,
                         address:address,
                         token:token,
                         keygen:keygen,

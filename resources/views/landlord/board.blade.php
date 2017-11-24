@@ -20,7 +20,7 @@
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/board') !!}" class="active">Applications</a>
-                <a href="#">Deals</a>
+                <a href="{!! url('/dealboard') !!}">Deals</a>
                 <a href="#">History</a>
             </div>
         </div>
@@ -76,10 +76,8 @@
         </div>
     @endif
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+    @include('layouts.tranquilo-core-scripts')
+    
     <script>
         function viewApplication(id,url){
 

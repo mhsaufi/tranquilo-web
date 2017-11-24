@@ -23,7 +23,8 @@
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}" class="active">Bookmark</a>
-                <a href="#">History</a>
+                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
+                <a href="{!! url('/myhistory') !!}">History</a>
             </div>
         </div>
     </header>
@@ -40,12 +41,12 @@
             <br><br>
 
             <?php $i = 1; ?>
+
+                <div class="row">
                 @foreach($deals as $deal)
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left" style="padding-left: 0px;">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-left">
                         <?php
-
                             $g_arr = explode('|',$deal->m_gallery);
-
                         ?>
                         <div class="property_card" onclick="viewModel('{{ $deal->m_id }}','{{ url('/viewmodel') }}')">
                             <div class="row property_card_header">
@@ -78,19 +79,21 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                
                     @if($i%4 == 0)
 
                             </div>
-                        </div>
                         <br>
                     <div class="row">
                     @endif
-                    </div>
 
-                 <?php $i++;?>
+
+
+                    <?php $i++;?>
+
                 @endforeach
+                </div>
             
             @endif
         </div>

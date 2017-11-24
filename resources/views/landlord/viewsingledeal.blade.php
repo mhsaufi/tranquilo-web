@@ -5,26 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo | Home</title>
+    <title>Tranquilo | Registration</title>
     
     @include('layouts.tranquilo-core-sheets')
 
-</head>
+</head><!--/head-->
 <body>
     
     @include('layouts.tranquilo-header')
-
-    <header class="mini-header-user">
+    
+    <header class="mini-header-landlord">
         <div class="row">
             <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="{!! url('/home') !!}" class="active">Property</a>
-                <a href="{!! url('/myapplication') !!}">Application</a>
-                <a href="{!! url('/mybookmark') !!}">Bookmark</a>
-                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
-                <a href="{!! url('/myhistory') !!}">History</a>
+                <a href="{!! url('/home') !!}">Property</a>
+                <a href="{!! url('/board') !!}">Applications</a>
+                <a href="{!! url('/dealboard') !!}" class="active">Deals</a>
+                <a href="#">History</a>
             </div>
         </div>
     </header>
@@ -33,7 +32,7 @@
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-centered view-a-property">
             <br>
-            <b><a href="{{ url('/home') }}">Property</a></b> > {{ $model->m_title }}<br>
+            <b><a href="{{ url('/dealboard') }}">My Deal</a></b> > {{ $model->m_title }}<br><br>
             <hr>
             <?php
 
@@ -41,35 +40,10 @@
                 $count = sizeof($img_arr);
 
             ?>
-            <div class="row view_property_card">
+            <div class="row" style="vertical-align: top;">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h4 class="property-header">{{ $model->m_title }}</h4>
-                    <small>posted on {{ $model->d_date }} by <b>{{ $model->name }}</b></small><br><br>
-                    <input type="hidden" name="rate_url" id="rate_url" value="{{ url('/rateproperty') }}"/>
-                    <input type="hidden" name="model_id" id="model_id" value="{{ $model->m_id }}"/>
-                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}"/>
-
-                    @if($model_rated == false)
-                        <span style="margin-right: 10px;color: grey;">
-                            <span id="rate-1"><i class="icon-star icon-2x rate"></i></span>
-                            <span id="rate-2"><i class="icon-star icon-2x rate"></i></span>
-                            <span id="rate-3"><i class="icon-star icon-2x rate"></i></span>
-                            <span id="rate-4"><i class="icon-star icon-2x rate"></i></span>
-                            <span id="rate-5"><i class="icon-star icon-2x rate"></i></span>
-                        </span>
-                    @else
-                        <?php $unrated_value = 5 - $rated_value;  $j = 1;?>
-
-                            @for($i=0;$i<$rated_value;$i++)
-                                <span><i class="icon-star icon-2x rate rate-checked"></i></span>
-                                <?php  $j++; ?>
-                            @endfor
-
-                            @for($k=0;$k<$unrated_value;$k++)
-                                <span><i class="icon-star icon-2x rate"></i></span>
-                                <?php  $j++; ?>
-                            @endfor
-                    @endif
+                    <small><em>You posted this deal on <b>{{ $model->d_date }}</b></em></small>
                     <br><br>
                     <i class="fa icon-phone"></i> <span style="font-size: 20px;">{{ $model->phone_no }}</span><br>
                     <i class="fa icon-briefcase"></i> <span style="font-size: 20px;">{{ $model->b_type_title }}</span><br>
@@ -124,33 +98,12 @@
                     
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-12">
-                    <button class="btn-block tranquilo-btn" style="margin-top: 30px!important;" onclick="applyProperty('{{ $model->d_id }}','{{ url('/applyproperty') }}')">Apply for this property</button>
-                </div>
-            </div>
+
         </div>
     </div>
     <br><br><br>
 
-    @include('layouts.tranquilo-footer')
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
-    <script src="myasset/js/tranquilo-rate.js"></script>
-    <script>
-        function goToAddProperty(url){
-            window.location.replace(url);
-        }
-        function applyProperty(d_id,url){
-
-            url = url + '?d=' + d_id;
-
-            window.location.replace(url);
-
-        }
-    </script>
+    @include('layouts.tranquilo-core-scripts')
 </body>
 </html>

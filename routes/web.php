@@ -15,6 +15,7 @@ Route::get('/',					'PublicController@index');
 Route::get('/aboutus',			'PublicController@about');
 Route::get('/contactus',		'PublicController@contact');
 Route::get('/property',			'PublicController@property');
+Route::get('/pullnotificationnumber', 'SystemController@unreadCounter');
 // Route::get('/',		'PublicController@index');
 
 Auth::routes();
@@ -22,7 +23,12 @@ Auth::routes();
 // Protected url redirection
 Route::group(['middleware'=>'auth'],function(){
 
-		Route::get('/home', 'HomeController@index')->name('home');
+		Route::get('/home', 			'HomeController@index')->name('home');
+		Route::get('/profile',			'HomeController@profile');
+		Route::post('/updateprofile',	'HomeController@updateProfile');
+
+		Route::get('/message',			'HomeController@listMessages');
+		Route::get('/readmail',			'HomeController@readMail');
 
 		Route::get('logout', 'SystemController@invalidate');
 
@@ -30,7 +36,8 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::post('/upload_gallery', 	'PropertyController@uploadGalleries');
 		Route::post('/checkout',		'PropertyController@checkOutDeal');
 
-		Route::post('/apply',			'ApplicationController@apply');
+		Route::post('/apply',				'ApplicationController@apply');
+		Route::post('/cancelapplication',	'ApplicationController@cancel');
 
 		Route::get('/viewmodel',		'PropertyController@viewProperty');
 		Route::get('/viewmodelc',		'PropertyController@viewProperty');
@@ -44,7 +51,14 @@ Route::group(['middleware'=>'auth'],function(){
 
 		Route::get('/board',			'ApplicationController@boardLandlord');
 		Route::get('/viewapplication',	'ApplicationController@viewApplication');
-		
+		Route::get('/dealboard',		'DealController@viewDeal');
+		Route::get('/viewdeal',			'DealController@viewSingleDeal');
+		Route::get('/adddeal',			'DealController@newDeal');
+		Route::post('/postdeal',		'DealController@addNewDeal');
+
+		Route::post('/reject',			'ApplicationController@rejectApplication');
+		Route::post('/accept',			'ApplicationController@acceptApplication');
+		Route::post('/review',			'ApplicationController@reviewApplication');
 });
 
 

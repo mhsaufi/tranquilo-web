@@ -16,5 +16,11 @@ class VerifyCsrfToken extends Middleware
         '/rateproperty',
         '/bookmarkdeal',
         '/viewapplication',
+        '/updateprofile',
+        '/postdeal',
+        '/cancelapplication',
+        '/accept',
+        '/reject',
+        '/review',
     ];
 }

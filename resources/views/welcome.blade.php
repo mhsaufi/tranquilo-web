@@ -374,9 +374,6 @@
 
     @include('layouts.tranquilo-footer')
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+    @include('layouts.tranquilo-core-scripts')
 </body>
 </html>

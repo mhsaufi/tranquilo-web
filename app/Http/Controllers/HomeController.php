@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::user()->role == 3){
 
@@ -35,10 +35,64 @@ class HomeController extends Controller
 
             $model_in = Db::raw('('.$query.') as model');
 
-            $model = Db::table('tranquilo_deal')
+            $query_model = Db::table('tranquilo_deal')
                     ->join($model_in,'tranquilo_deal.d_model','=','model.m_id')
-                    ->orderBy('tranquilo_deal.d_date','desc')
-                    ->paginate(4);
+                    ->orderBy('tranquilo_deal.d_date','desc');
+
+            if($request->input('from') && $request->input('to')){
+
+                $query_model->whereBetween('tranquilo_deal.d_value', array($request->input('from'), $request->input('to')));
+            }
+
+            if($request->input('state')){
+                if($request->input('state') <> 0){
+                    $query_model->where('model.m_state',$request->input('state'));
+                }
+            }
+
+            if($request->input('h_type')){
+                $query_model->where('model.m_h_type',$request->input('h_type'));
+            }
+
+            if($request->input('rate_sort')){
+                if($request->input('rate_sort') == 'asc'){
+                    $query_model->orderBy('model.m_rate_value');
+                }
+                if($request->input('rate_sort') == 'desc'){
+                    $query_model->orderBy('model.m_rate_value','desc');
+                }
+            }
+
+            if($request->input('price_sort')){
+                if($request->input('price_sort') == 'asc'){
+                    $query_model->orderBy('tranquilo_deal.d_value');
+                }
+                if($request->input('price_sort') == 'desc'){
+                    $query_model->orderBy('tranquilo_deal.d_value','desc');
+                }
+            }
+
+            if($request->input('view_sort')){
+                if($request->input('view_sort') == 'asc'){
+                    $query_model->orderBy('model.m_view');
+                }
+                if($request->input('view_sort') == 'desc'){
+                    $query_model->orderBy('model.m_view','desc');
+                }
+            }
+
+            if($request->input('date_sort')){
+                if($request->input('date_sort') == 'asc'){
+                    $query_model->orderBy('tranquilo_deal.d_date');
+                }
+                if($request->input('date_sort') == 'desc'){
+                    $query_model->latest('tranquilo_deal.d_date');
+                }
+            }
+
+            $model = $query_model->paginate(7);
+
+            $model_count = $query_model->count();
 
             $state = Db::table('tranquilo_state')->orderBy('state_title')->get();
             $h_type = Db::table('tranquilo_house_type')->orderBy('h_type_title')->get();
@@ -47,6 +101,7 @@ class HomeController extends Controller
 
             $bookmarked = explode("|", $bookmark_record->bookmark_deal);
 
+            $data['model_count'] = $model_count;
             $data['bookmarked'] = $bookmarked;
             $data['models'] = $model;
             $data['state'] = $state;
@@ -67,6 +122,11 @@ class HomeController extends Controller
 
             return view('home_landlord',$data);
         }
+    }
+
+    public function profile(){
+
+        return view('profilepage');
     }
 
     public function addProperty(){
@@ -117,5 +177,83 @@ class HomeController extends Controller
         $data['bookmark_count'] = $bookmark_count;
 
         return view('client.bookmarkc', $data);
+    }
+
+    public function updateProfile(Request $request){
+
+        $info_updated = '';
+
+        $col = $request->input('col');
+
+        if($col == 'name')
+        {
+            if($request->input('name') <> ''){
+
+                Db::table('tranquilo_users')->where('id',Auth::id())->update(['name'=>$request->input('name')]);
+                $info_updated = $request->input('name');
+
+            }else{
+
+                $info_updated = Auth::user()->name; 
+            }
+        }
+
+        if($col == 'email')
+        {
+            if($request->input('email') <> ''){
+                
+                Db::table('tranquilo_users')->where('id',Auth::id())->update(['email'=>$request->input('email')]);
+                $info_updated = $request->input('email');
+
+            }else{
+
+                $info_updated = Auth::user()->email; 
+            }
+        }
+
+        
+
+
+        return $info_updated;
+    }
+
+    public function listMessages(){
+
+        $message_count = Db::table('tranquilo_message')->where('message_recipient',Auth::id())->count();
+
+        if($message_count <> 0){
+
+            $messages = Db::table('tranquilo_message')
+                        ->join('tranquilo_users','tranquilo_message.message_sender','=','tranquilo_users.id')
+                        ->where('tranquilo_message.message_recipient',Auth::id())
+                        ->latest('tranquilo_message.created_at')
+                        ->paginate(6);
+
+            $data['unread_count'] = Db::table('tranquilo_message')
+                                    ->where('message_recipient',Auth::id())
+                                    ->where('message_status',1)
+                                    ->count();
+
+            $data['messages'] = $messages;
+
+        }
+
+        $data['message_count'] = $message_count;
+
+        return view('messages',$data);
+    }
+
+    public function readMail(Request $request){
+
+        $mail_id = $request->input('message');
+
+        $mail = Db::table('tranquilo_message')->where('message_id',$mail_id)->first();
+
+        Db::table('tranquilo_message')->where('message_id',$mail_id)->update(['message_status'=>2]);
+
+        $data['mail'] = $mail;
+
+        return view('readmail',$data);
+
     }
 }

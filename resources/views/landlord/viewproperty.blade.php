@@ -20,9 +20,9 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="#" class="active">Property</a>
-                <a href="#">Rental</a>
-                <a href="#">Favourite</a>
+                <a href="{!! url('/home') !!}" class="active">Property</a>
+                <a href="{!! url('/board') !!}">Applications</a>
+                <a href="{!! url('/dealboard') !!}">Deals</a>
                 <a href="#">History</a>
             </div>
         </div>
@@ -105,10 +105,8 @@
     <br><br><br>
 
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+    @include('layouts.tranquilo-core-scripts')
+    
     <script>
         function goToAddProperty(url){
             window.location.replace(url);

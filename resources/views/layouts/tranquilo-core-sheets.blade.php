@@ -1,5 +1,6 @@
 <link href="myasset/css/bootstrap.min.css" rel="stylesheet">
 <link href="myasset/css/font-awesome.min.css" rel="stylesheet">
+<link href="myasset/css/font-awesome.css" rel="stylesheet">
 <link href="myasset/css/prettyPhoto.css" rel="stylesheet">
 <link href="myasset/css/animate.css" rel="stylesheet">
 <link href="myasset/css/main.css" rel="stylesheet">    

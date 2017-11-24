@@ -20,40 +20,102 @@
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/board') !!}" class="active">Applications</a>
-                <a href="#">Deals</a>
+                <a href="{!! url('/dealboard') !!}">Deals</a>
                 <a href="#">History</a>
             </div>
         </div>
     </header>
     <br>
 
+    <?php
+        $g_arr = explode('|',$application->m_gallery);
+    ?>
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-centered">
-            <br>
-            <b><a href="{{ url('/board') }}">Application</a></b> > Application by {{ $application->name }}<br>
-            <br>
-            <h2><i class="fa icon-exchange"></i>Application</h2>
-            <hr>
-            <div class="row view_property_card">
+            <div class="row view_application_card">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h3 class="tranquilo-header">{{ $application->m_title }}</h3>
-                    <hr>
-                    <span style="opacity: 0.8;"><em>Application made on {{ $application->application_date }} by <b>{{ $application->name }}</b></em></span>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <br>
+                            <b><a href="{{ url('/board') }}">Application</a></b> > Application by {{ $application->name }}<br><br>
+                            <div class="tranquilo-application-banner" style="background-image: url({{ url('/galleries/'.$application->m_id.'/'.$g_arr[0]) }});background-size: cover;background-position: center;">
 
-
+                                <h2 class="tranquilo-header" style="margin-left: 20px;color: white;text-shadow: 0 0 5px black;">{{ $application->m_title }}</h2>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <span style="opacity: 0.8;"><em>Application made on {{ $application->application_date }} by <b>{{ $application->name }}</b></em></span>
+                            <br><br><br>
+                            <p>Requested to be valued at RM{{ $application->application_installment }}</p>
+                            <p>"{!! $application->application_description !!}"</p>
+                            <p>
+                                <i class="fa icon-phone"></i>
+                                @if($application->phone_no != '')
+                                    {{ $application->phone_no }}
+                                @else
+                                    Not given
+                                @endif
+                            </p>
+                            <p>
+                                <i class="fa icon-envelope"></i>
+                                @if($application->email != '')
+                                    {{ $application->email }}
+                                @else
+                                    Not given
+                                @endif
+                            </p>
+                            <br><br>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    @if($application->application_status != 4)
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <button class="btn btn-block btn-danger" onclick="rejectApplication('{{ $application->application_id }}','{{ url('/reject') }}')">Reject</button>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <button class="btn btn-block btn-success" onclick="acceptApplication('{{ $application->application_id }}','{{ url('/accept') }}')">Accept</button>
+                        </div>
+                    </div>
+                    @endif
                 </div>
+                
+                
             </div>
         </div>
     </div>
+    <br><br><br>
 
-    <div class="tranquilo-push-bottom">
         @include('layouts.tranquilo-footer')
-    </div>
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+
+    @include('layouts.tranquilo-core-scripts')
+    
+    <script>
+        function acceptApplication(app_id,url){
+
+            var redirect_url = "{{ url('/board') }}";
+
+            $.post(url,{app_id:app_id},function(){
+                window.location.replace(redirect_url);
+            });
+
+
+        }
+        function rejectApplication(app_id,url){
+
+            var redirect_url = "{{ url('/board') }}";
+
+            $.post(url,{app_id:app_id},function(){   
+                window.location.replace(redirect_url);
+            });
+        }
+    </script>
 
 </body>
 </html>

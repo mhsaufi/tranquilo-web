@@ -21,11 +21,11 @@
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/myapplication') !!}" class="active">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
-                <a href="#">History</a>
+                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
+                <a href="{!! url('/myhistory') !!}">History</a>
             </div>
         </div>
     </header>
-    <br>
 
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-centered">
@@ -49,35 +49,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
                     @foreach($application as $app)
-                    <tr>
-                        <td>{!! $i !!}</td>
+                    <tr id="app_{{ $app->application_id }}">
+                        <td>{!! $app->application_id !!}</td>
                         <td>{{ $app->m_title }}</td>
                         <td>{{ $app->b_type_title }}</td>
                         <td>{{ $app->d_date }}</td>
                         <td>{{ $app->application_status_title }}</td>
                         <td>{{ $app->application_installment }}</td>
                         <td>
-                            <button class="btn btn-danger btn-block"><i class="fa icon-times"></i>Cancel</button>
+                            <button class="btn btn-danger btn-block" onclick="cancelApplication('{{ $app->application_id }}','{{ url('/cancelapplication') }}')"><i class="fa icon-times"></i>Cancel</button>
                         </td>
                     </tr>
-                    <?php $i++; ?>
                     @endforeach
                 </tbody>
             </table>
+            <br>
+            {{ $application->links() }}
             @endif
         </div>
     </div>
     <br><br><br>
 
-    @include('layouts.tranquilo-footer')
+    <div class="tranquilo-push-bottom">
+        @include('layouts.tranquilo-footer')
+    </div>
 
 
     <script src="myasset/js/jquery.js"></script>
+    <script src="myasset/js/jquery-ui.js"></script>
     <script src="myasset/js/bootstrap.min.js"></script>
     <script src="myasset/js/jquery.prettyPhoto.js"></script>
     <script src="myasset/js/main.js"></script>
+    <script>
+        function cancelApplication(application_id,url){
+
+            $.post(url,{application:application_id},function(data){
+
+                if(data == 0){
+                    $('#app_'+application_id).hide('fade','slow',function(){
+
+                    });
+                }
+                else
+                {
+                    alert('Cannot cancel this application');
+                }
+
+            });
+
+        }
+    </script>
 
 </body>
 </html>

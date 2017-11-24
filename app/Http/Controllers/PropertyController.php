@@ -107,8 +107,6 @@ class PropertyController extends Controller
     	$year = $request->input('year');
     	$m_type = $request->input('m_type');
     	$m_price = $request->input('m_price');
-    	$b_type = $request->input('b_type');
-    	$deal = $request->input('deal');
     	$address = $request->input('address');
     	$keygen = $request->input('keygen');
     	$state = $request->input('state');
@@ -141,15 +139,6 @@ class PropertyController extends Controller
     															'm_state'=>$state,
     															'm_address'=>$address
     														]);
-
-    	Db::table('tranquilo_deal')->insert([
-    											'd_owner'=>Auth::id(),
-    											'd_b_type'=>$b_type,
-    											'd_model'=>$model_id,
-    											'd_value'=>$deal,
-    											'd_status'=>1,
-    											'd_date'=>$now
-    										]);
     }
 
     public function viewProperty(Request $request){

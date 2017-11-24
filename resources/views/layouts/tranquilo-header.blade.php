@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner" id="tranquilo_header">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,7 +23,9 @@
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown">{!! Auth::user()->name !!} <i class="icon-angle-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="{!! url('/home') !!}"><i class="fa icon-th-large"></i> Tranquilo Panel</a></li>
-                        <li><a href="{!! url('/home') !!}"><i class="fa icon-user"></i> Profile</a></li>
+                        <li><a href="{!! url('/profile') !!}">
+                            <i class="fa icon-user"></i> Profile</a> 
+                        </li>
                         <li><a href="{!! route('logout') !!}"><i class="fa icon-signout"></i>Sign Out</a></li>
                     </ul>
                 </li>

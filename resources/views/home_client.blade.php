@@ -24,6 +24,7 @@
                 <a href="{!! url('/home') !!}" class="active">Property</a>
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
+                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
                 <a href="{!! url('/myhistory') !!}">History</a>
             </div>
         </div>
@@ -34,6 +35,8 @@
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 center col-centered">
             <div class="row">
+                <form action="{{ url('/home') }}" method="GET">
+                    {{ csrf_field() }}
                 <div class="col-lg-12 col-md-12 col-sm-12 col-centered">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
@@ -43,7 +46,7 @@
                             <input type="text" name="to" class="form-control" placeholder="Deal to" />
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12">
-                            <select name="state" class="form-control">
+                            <select name="h_type" class="form-control">
                                 <option value="0">--property type--</option>
                                 @foreach($h_type as $h)
                                     <option value="{!! $h->h_type_id !!}">{!! $h->h_type_title !!}</option>
@@ -52,7 +55,7 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <select name="state" class="form-control">
-                                <option value="0">--select state--</option>
+                                <option value="0" selected="selected">All</option>
                                 @foreach($state as $st)
                                     <option value="{!! $st->state_id !!}">{!! $st->state_title !!}</option>
                                 @endforeach                                                        
@@ -60,11 +63,55 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <button class="tranquilo-btn"><i class="icon-search" style="margin-right: 10px;"></i>Find Property</button>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                            <input type="checkbox" id="sort_check" /> Sort
+                            <br><br>
+                            <div class="row" id="sorting_board">
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    By Rating
+                                    <select name="rate_sort" class="form-control">
+                                        <option value="none">not selected</option>
+                                        <option value="asc">Lowest To Highest</option>
+                                        <option value="desc">Highest To Lowest</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    By Date
+                                    <select name="date_sort" class="form-control">
+                                        <option value="none">not selected</option>
+                                        <option value="asc">Newest first</option>
+                                        <option value="desc">Oldest first</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    By Price
+                                    <select name="price_sort" class="form-control">
+                                        <option value="none">not selected</option>
+                                        <option value="asc">Lowest First</option>
+                                        <option value="desc">Highest First</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    By most viewed
+                                    <select name="view_sort" class="form-control">
+                                        <option value="none">not selected</option>
+                                        <option value="asc">Most views first</option>
+                                        <option value="desc">Less views first</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <button class="tranquilo-btn" role="submit"><i class="icon-search" style="margin-right: 10px;"></i>Find Property</button>
+                        </div>
+                    </div>
+                </form>
                     <hr>
+
+                    @if($model_count != 0)
+
                     @foreach($models as $model)
 
                         <div class="row property_card_client">
@@ -122,6 +169,15 @@
 
                     {!! $models->links() !!}
 
+                    <?php $c = $models->count(); ?>
+
+                    @else
+
+                    <?php $c = 0; ?>
+
+                    <p>No deal found for this filter
+
+                    @endif
                 </div>
             </div>
             
@@ -129,14 +185,34 @@
     </div>
     <br><br><br>
 
-    @include('layouts.tranquilo-footer')
+    @if($c > 6)
+        @include('layouts.tranquilo-footer')
+    @else
+        <div class="tranquilo-push-bottom">
+            @include('layouts.tranquilo-footer')
+        </div>
+    @endif
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+    @include('layouts.tranquilo-core-scripts')
+    
     <script src="myasset/js/tranquilo-bookmark.js"></script>
+    <script src="myasset/js/tranquilo-sort-plugin.js"></script>
     <script>
+        $(document).ready(function(){
+            $('#sorting_board').hide();
+
+            if($('#sort_check:checked').length > 0){
+
+                $("#sorting_board").show();
+
+            }
+
+            if($('#sort_check:checked').length == 0){
+
+                $('#sorting_board').hide();
+            }
+        });
+
         function viewModel(id,url){
             window.location.replace(url+'?m='+id);
         }

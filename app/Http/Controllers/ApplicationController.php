@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\MailingController as Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class ApplicationController extends Controller
                             ->join('tranquilo_application_status','tranquilo_application.application_status','=','tranquilo_application_status.application_status_id')
                             ->latest('tranquilo_application.application_date')
                             ->where('application_client',Auth::id())
-                            ->get();
+                            ->paginate(4);
 
             $data['application_count'] = $application_count;
             $data['application'] = $application;
@@ -157,11 +158,63 @@ class ApplicationController extends Controller
                         ->where('tranquilo_application.application_id',$app_id)
                         ->first();
 
+        $mail = new Mail;
+
+        if($application->application_status == 1){
+            $mail->MailReviewed($application->application_client,$app_id);
+            $this->reviewApplication($app_id);
+        }
+
         $t_date = Carbon::parse($application->application_date);
         $application->application_date = $t_date->toFormattedDateString();
 
         $data['application'] = $application;
 
         return view('landlord.applicationview',$data);
+    }
+
+    public function cancel(Request $request){
+
+        $application_id = $request->input('application');
+        
+        Db::table('tranquilo_application')->where('application_id',$application_id)->delete();
+
+    }
+
+    public function reviewApplication($application_id){
+
+        // update application as accepted
+        Db::table('tranquilo_application')->where('application_id',$application_id)->update(['application_status'=>2]);
+
+    }
+
+    public function rejectApplication(Request $request){
+
+        $app_id = $request->input('app_id');
+
+        // update application as rejected
+        Db::table('tranquilo_application')->where('application_id',$app_id)->update(['application_status'=>4]);
+
+        $app = Db::table('tranquilo_application')->where('application_id',$app_id)->first();
+
+        $mail = new Mail;
+
+        $mail->MailRejected($app_id,$app->application_client);
+
+    }
+
+    public function acceptApplication(Request $request){
+
+        $app_id = $request->input('app_id');
+
+        // update application as accepted
+        Db::table('tranquilo_application')->where('application_id',$app_id)->update(['application_status'=>3]);
+
+        $app = Db::table('tranquilo_application')->where('application_id',$app_id)->first();
+
+        $mail = new Mail;
+
+        $mail->MailAccepted($app_id,$app->application_client);
+
     }
 }

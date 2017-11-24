@@ -23,7 +23,8 @@
                 <a href="{!! url('/home') !!}" class="active">Property</a>
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
-                <a href="#">History</a>
+                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
+                <a href="{!! url('/myhistory') !!}">History</a>
             </div>
         </div>
     </header>
