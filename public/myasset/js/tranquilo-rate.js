@@ -1,4 +1,6 @@
+$(document).ready(function(){
 
+});
 var str = '<i class="icon-star icon-2x rate rate-checked"></i>';
 
 var rate_url = $('#rate_url').val();
@@ -12,6 +14,7 @@ $('#rate-1').hover(function(){
 });
 
 $('#rate-1').click(function(){
+
 	$(this).html(str);
 
 	$.post(rate_url,{rate:1,model:model_id,user:user_id},function(){

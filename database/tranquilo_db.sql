@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Nov 22, 2017 at 04:17 PM
+-- Generation Time: Nov 27, 2017 at 02:33 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -56,11 +56,11 @@ CREATE TABLE `tranquilo_application` (
 --
 
 INSERT INTO `tranquilo_application` (`application_id`, `application_deal`, `application_installment`, `application_description`, `application_client`, `application_status`, `application_update_date`, `application_date`) VALUES
-(1, 5, 4, 'YOLO', 2, 1, '2017-11-21 12:20:48', '2017-11-21 12:20:48'),
-(6, 5, 4, 'YOLO', 2, 1, '2017-11-21 12:24:38', '2017-11-21 12:24:38'),
-(7, 2, 1, 'YOLO 2', 2, 1, '2017-11-21 12:26:03', '2017-11-21 12:26:03'),
-(8, 2, 1, 'YOLO 2', 2, 1, '2017-11-21 12:26:35', '2017-11-21 12:26:35'),
-(9, 2, 1, 'YOLO 2', 2, 1, '2017-11-21 12:27:26', '2017-11-21 12:27:26');
+(1, 5, 4, 'YOLO', 2, 4, '2017-11-27 13:19:59', '2017-11-21 12:20:48'),
+(6, 5, 4, 'YOLO', 2, 4, '2017-11-24 18:29:12', '2017-11-21 12:24:38'),
+(7, 2, 1, 'YOLO 2', 2, 4, '2017-11-24 18:28:53', '2017-11-21 12:26:03'),
+(8, 2, 1, 'YOLO 2', 2, 4, '2017-11-24 20:41:55', '2017-11-21 12:26:35'),
+(9, 1, 300, 'Hope approved', 2, 4, '2017-11-27 13:14:19', '2017-11-27 02:25:38');
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,7 @@ CREATE TABLE `tranquilo_bookmark` (
 --
 
 INSERT INTO `tranquilo_bookmark` (`bookmark_id`, `bookmark_user`, `bookmark_deal`) VALUES
-(1, 2, '5|4|2');
+(1, 2, '5|4|2|7|6|9');
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,8 @@ INSERT INTO `tranquilo_business_type` (`b_type_id`, `b_type_title`) VALUES
 (2, 'Rental'),
 (3, 'Ownership Transfer'),
 (4, 'Free'),
-(5, 'Contract');
+(5, 'Contract'),
+(6, 'Homestay');
 
 -- --------------------------------------------------------
 
@@ -134,6 +135,8 @@ CREATE TABLE `tranquilo_deal` (
   `d_id` int(11) NOT NULL,
   `d_client` int(11) DEFAULT NULL,
   `d_owner` int(11) NOT NULL,
+  `d_contact` text,
+  `d_description` longtext,
   `d_payment_type` int(11) DEFAULT NULL,
   `d_b_type` int(11) NOT NULL,
   `d_model` int(11) NOT NULL,
@@ -147,12 +150,16 @@ CREATE TABLE `tranquilo_deal` (
 -- Dumping data for table `tranquilo_deal`
 --
 
-INSERT INTO `tranquilo_deal` (`d_id`, `d_client`, `d_owner`, `d_payment_type`, `d_b_type`, `d_model`, `d_installment`, `d_value`, `d_status`, `d_date`) VALUES
-(1, NULL, 1, NULL, 5, 1, NULL, 450000, 1, '2017-11-18 03:17:21'),
-(2, NULL, 1, NULL, 3, 2, NULL, 560000, 1, '2017-11-18 03:31:13'),
-(3, NULL, 1, NULL, 2, 3, NULL, 450000, 1, '2017-11-18 03:34:52'),
-(4, NULL, 1, NULL, 2, 4, NULL, 250, 1, '2017-11-18 07:18:23'),
-(5, NULL, 1, NULL, 3, 5, NULL, 249999, 1, '2017-11-18 07:26:14');
+INSERT INTO `tranquilo_deal` (`d_id`, `d_client`, `d_owner`, `d_contact`, `d_description`, `d_payment_type`, `d_b_type`, `d_model`, `d_installment`, `d_value`, `d_status`, `d_date`) VALUES
+(1, NULL, 1, '0135448612', '<p><br></p>', NULL, 1, 1, NULL, 450000, 1, '2017-11-18 03:17:21'),
+(3, NULL, 1, '0135448612', '<p><br></p>', NULL, 4, 3, NULL, 450000, 1, '2017-11-18 03:34:52'),
+(4, NULL, 1, '0135448612', '<p><br></p>', NULL, 4, 4, NULL, 450000, 1, '2017-11-18 07:18:23'),
+(5, NULL, 1, '0135448612', '<p><br></p>', NULL, 5, 5, NULL, 450000, 1, '2017-11-18 07:26:14'),
+(6, NULL, 1, '0135448612', '<p>Goona change everything back to the original state<br></p>', NULL, 2, 4, NULL, 450000, 1, '2017-11-23 07:19:05'),
+(7, NULL, 1, '0135448612', '<p><br></p>', NULL, 2, 5, NULL, 450000, 1, '2017-11-23 07:24:45'),
+(8, NULL, 1, '0135448612', '<p><br></p>', NULL, 2, 4, NULL, 450000, 1, '2017-11-26 21:21:50'),
+(9, NULL, 1, '0135448612', '<p><br></p>', NULL, 2, 6, NULL, 450000, 1, '2017-11-26 22:18:27'),
+(10, NULL, 1, '0135448612', '<p>Nothing to be scared of..huhu<br></p>', NULL, 3, 1, NULL, 230000, 1, '2017-11-27 03:41:37');
 
 -- --------------------------------------------------------
 
@@ -207,6 +214,71 @@ INSERT INTO `tranquilo_house_type` (`h_type_id`, `h_type_title`, `type_class`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tranquilo_message`
+--
+
+CREATE TABLE `tranquilo_message` (
+  `message_id` int(11) NOT NULL,
+  `message_sender` int(11) NOT NULL,
+  `message_recipient` int(11) DEFAULT NULL,
+  `message_subject` text NOT NULL,
+  `message_content` longtext NOT NULL,
+  `message_status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_message`
+--
+
+INSERT INTO `tranquilo_message` (`message_id`, `message_sender`, `message_recipient`, `message_subject`, `message_content`, `message_status`, `created_at`) VALUES
+(1, 1, 2, 'This is a testing message only', 'Hi there i am a testing object', 2, '2017-11-24 15:02:14'),
+(2, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 17:18:58'),
+(3, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 17:47:51'),
+(4, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 17:48:04'),
+(5, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 17:48:12'),
+(6, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 17:48:23'),
+(7, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 17:49:45'),
+(8, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 17:57:59'),
+(9, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been accepted by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 17:58:05'),
+(10, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 18:28:47'),
+(11, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 18:29:09'),
+(12, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 18:32:20'),
+(13, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 18:32:23'),
+(14, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 2, '2017-11-24 18:32:27'),
+(15, 3, 2, 'Tranquilo Application', 'Your application for Naratha Semi Houses on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-24 20:41:55'),
+(16, 3, 2, 'Tranquilo Application', 'Your application for Setia Villa S6 on Nov 27, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 02:27:55'),
+(17, 3, 2, 'Tranquilo Application', 'Your application for Setia Villa S6 on Nov 27, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:14:19'),
+(18, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:19:59'),
+(19, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:21:41'),
+(20, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:22:20'),
+(21, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:23:03'),
+(22, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:29:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tranquilo_message_status`
+--
+
+CREATE TABLE `tranquilo_message_status` (
+  `message_status_id` int(11) NOT NULL,
+  `message_status_title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_message_status`
+--
+
+INSERT INTO `tranquilo_message_status` (`message_status_id`, `message_status_title`) VALUES
+(1, 'Unread'),
+(2, 'Read'),
+(3, 'Draft'),
+(4, 'Deleted');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tranquilo_model`
 --
 
@@ -227,19 +299,21 @@ CREATE TABLE `tranquilo_model` (
   `m_address` text,
   `m_view` int(11) NOT NULL DEFAULT '0',
   `m_rate_value` int(11) NOT NULL DEFAULT '0',
-  `m_rate_by` int(11) NOT NULL DEFAULT '0'
+  `m_rate_by` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tranquilo_model`
 --
 
-INSERT INTO `tranquilo_model` (`m_id`, `m_title`, `m_year`, `m_price`, `m_b_type`, `m_h_type`, `m_owner`, `m_description`, `m_description_html`, `m_b_type_2`, `m_gallery`, `m_gallery_key`, `m_state`, `m_address`, `m_view`, `m_rate_value`, `m_rate_by`) VALUES
-(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 3, 2, 1),
-(2, 'Naratha Semi Houses', '3', 654000, 3, 3, 1, NULL, '', NULL, 'semi-d-house-for-sell-RM-980k-new_9.jpg', '8370UQT2H6ADR9ZX1JOM', 14, 'Jalan Keramat 8 Datuk Keramat', 6, 4, 1),
-(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 13, 1, 1),
-(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 56, 4, 1),
-(5, 'Villa Sungai Ramal', '2', 350000, 3, 7, 1, 'Villa Sungai Ramal, Jalan Sungai Besi, Sungai Ramal Dalam', '<p><br></p>', NULL, 'AAEAAQAAAAAAAAgoAAAAJGM2NWQ2NjU3LWY5OWQtNDRhOS1hZmNiLWQ1ZWM1OThjYWRlNQ.jpg', '0VMLODKPEZHBQR6S9CWT', 14, 'Jalan Sungai Besi, Sungai Ramal Dalam', 36, 2, 1);
+INSERT INTO `tranquilo_model` (`m_id`, `m_title`, `m_year`, `m_price`, `m_b_type`, `m_h_type`, `m_owner`, `m_description`, `m_description_html`, `m_b_type_2`, `m_gallery`, `m_gallery_key`, `m_state`, `m_address`, `m_view`, `m_rate_value`, `m_rate_by`, `created_at`) VALUES
+(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 178, 2, 1, '2017-11-27 10:38:40'),
+(2, 'Naratha Semi Houses', '3', 654000, 3, 3, 1, NULL, '', NULL, 'semi-d-house-for-sell-RM-980k-new_9.jpg', '8370UQT2H6ADR9ZX1JOM', 14, 'Jalan Keramat 8 Datuk Keramat', 43, 0, 0, '2017-11-27 10:38:40'),
+(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 31, 0, 0, '2017-11-27 10:38:40'),
+(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 105, 0, 0, '2017-11-27 10:38:40'),
+(5, 'Villa Sungai Ramal', '2', 350000, 3, 7, 1, 'Villa Sungai Ramal, Jalan Sungai Besi, Sungai Ramal Dalam', '<p><br></p>', NULL, 'AAEAAQAAAAAAAAgoAAAAJGM2NWQ2NjU3LWY5OWQtNDRhOS1hZmNiLWQ1ZWM1OThjYWRlNQ.jpg', '0VMLODKPEZHBQR6S9CWT', 14, 'Jalan Sungai Besi, Sungai Ramal Dalam', 84, 0, 0, '2017-11-27 10:38:40'),
+(6, 'Suria Minton VIlla', '3', 1788653, NULL, 7, 1, 'Nothing to describe', '<p><br></p>', NULL, 'PPHO.2021764.V550.jpg', 'K295DY6PFZTB0JU3WREN', 1, 'Jalan Suria KLCC', 31, 3, 1, '2017-11-27 10:38:40');
 
 -- --------------------------------------------------------
 
@@ -259,7 +333,60 @@ CREATE TABLE `tranquilo_rating` (
 --
 
 INSERT INTO `tranquilo_rating` (`rating_id`, `user_id`, `rated_model`, `avg_rated`) VALUES
-(1, 2, '5|4|3|2|1', '2|4|1|4|2');
+(1, 2, '6|1', '3|2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tranquilo_review`
+--
+
+CREATE TABLE `tranquilo_review` (
+  `review_id` int(11) NOT NULL,
+  `review_content` text NOT NULL,
+  `review_status` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `deal_id` int(11) NOT NULL,
+  `review_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_review`
+--
+
+INSERT INTO `tranquilo_review` (`review_id`, `review_content`, `review_status`, `user_id`, `deal_id`, `review_date`) VALUES
+(1, 'Setia Villa S6 located close to uptown. Lots of cheap shop there. Good location anyway', 2, 2, 1, '2017-11-27 03:03:00'),
+(2, 'Narathiwat section', 2, 2, 1, '2017-11-27 03:07:49'),
+(3, 'Narathiwat section', 2, 2, 1, '2017-11-27 03:08:50'),
+(4, 'Narathiwat section', 2, 2, 1, '2017-11-27 03:09:10'),
+(5, 'Narathiwat section', 2, 2, 1, '2017-11-27 03:15:02'),
+(6, 'sehingga terjadi nya perpisahan', 2, 2, 1, '2017-11-27 03:35:10'),
+(7, 'karam aku dilautan duka', 2, 2, 1, '2017-11-27 03:37:55'),
+(8, 'apakah salahku', 2, 2, 1, '2017-11-27 03:38:36'),
+(9, 'kentang gorengku masak hangus', 2, 2, 1, '2017-11-27 03:40:09'),
+(10, 'Narathiwat?', 2, 2, 2, '2017-11-27 03:40:43'),
+(11, 'hangus terbakar', 2, 1, 5, '2017-11-27 05:07:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tranquilo_review_status`
+--
+
+CREATE TABLE `tranquilo_review_status` (
+  `review_status_id` int(11) NOT NULL,
+  `review_status_title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_review_status`
+--
+
+INSERT INTO `tranquilo_review_status` (`review_status_id`, `review_status_title`) VALUES
+(1, 'Pending'),
+(2, 'Approved'),
+(3, 'Display'),
+(4, 'Banned');
 
 -- --------------------------------------------------------
 
@@ -320,7 +447,8 @@ CREATE TABLE `tranquilo_users` (
 
 INSERT INTO `tranquilo_users` (`id`, `name`, `phone_no`, `email`, `address`, `state`, `status`, `role`, `img`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Ahmad', '0135448612', 'ahmad@gmail.com', NULL, NULL, 1, 2, NULL, '$2y$10$q7bL5jNe3HbyfmKzu0T3FO0XqTL/LDPJr/relRR.mIjqgOBnf510.', '', '2017-11-17 07:00:39', '2017-11-17 07:00:39'),
-(2, 'hazard', NULL, 'hazard@chelseafc.com', NULL, NULL, 1, 3, NULL, '$2y$10$iGt96IhSYbIEPS171./lBegw0hYTBge650atSBpoAVRBUV9E9S6OG', '', '2017-11-18 11:51:32', '2017-11-18 11:51:32');
+(2, 'piyad', NULL, 'habibmohdsaufi@gmail.com', NULL, NULL, 1, 3, NULL, '$2y$10$iGt96IhSYbIEPS171./lBegw0hYTBge650atSBpoAVRBUV9E9S6OG', '', '2017-11-18 11:51:32', '2017-11-18 11:51:32'),
+(3, 'Tranquilo Property', '0325567844', 'customer@tranquiloproperty.net', NULL, 2, 1, 3, NULL, 'tranquilo123', NULL, '2017-11-21 22:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -396,6 +524,18 @@ ALTER TABLE `tranquilo_house_type`
   ADD PRIMARY KEY (`h_type_id`);
 
 --
+-- Indexes for table `tranquilo_message`
+--
+ALTER TABLE `tranquilo_message`
+  ADD PRIMARY KEY (`message_id`);
+
+--
+-- Indexes for table `tranquilo_message_status`
+--
+ALTER TABLE `tranquilo_message_status`
+  ADD PRIMARY KEY (`message_status_id`);
+
+--
 -- Indexes for table `tranquilo_model`
 --
 ALTER TABLE `tranquilo_model`
@@ -406,6 +546,18 @@ ALTER TABLE `tranquilo_model`
 --
 ALTER TABLE `tranquilo_rating`
   ADD PRIMARY KEY (`rating_id`);
+
+--
+-- Indexes for table `tranquilo_review`
+--
+ALTER TABLE `tranquilo_review`
+  ADD PRIMARY KEY (`review_id`);
+
+--
+-- Indexes for table `tranquilo_review_status`
+--
+ALTER TABLE `tranquilo_review_status`
+  ADD PRIMARY KEY (`review_status_id`);
 
 --
 -- Indexes for table `tranquilo_state`
@@ -453,12 +605,12 @@ ALTER TABLE `tranquilo_bookmark`
 -- AUTO_INCREMENT for table `tranquilo_business_type`
 --
 ALTER TABLE `tranquilo_business_type`
-  MODIFY `b_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `b_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tranquilo_deal`
 --
 ALTER TABLE `tranquilo_deal`
-  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tranquilo_deal_status`
 --
@@ -470,15 +622,35 @@ ALTER TABLE `tranquilo_deal_status`
 ALTER TABLE `tranquilo_house_type`
   MODIFY `h_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
+-- AUTO_INCREMENT for table `tranquilo_message`
+--
+ALTER TABLE `tranquilo_message`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `tranquilo_message_status`
+--
+ALTER TABLE `tranquilo_message_status`
+  MODIFY `message_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `tranquilo_model`
 --
 ALTER TABLE `tranquilo_model`
-  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tranquilo_rating`
 --
 ALTER TABLE `tranquilo_rating`
   MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tranquilo_review`
+--
+ALTER TABLE `tranquilo_review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `tranquilo_review_status`
+--
+ALTER TABLE `tranquilo_review_status`
+  MODIFY `review_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tranquilo_state`
 --
@@ -488,7 +660,7 @@ ALTER TABLE `tranquilo_state`
 -- AUTO_INCREMENT for table `tranquilo_users`
 --
 ALTER TABLE `tranquilo_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tranquilo_users_role`
 --

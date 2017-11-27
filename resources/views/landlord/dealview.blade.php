@@ -20,9 +20,11 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
+                <a href="{!! url('/feed') !!}">Feed</a>
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/board') !!}">Applications</a>
                 <a href="{!! url('/dealboard') !!}" class="active">Deals</a>
+                <a href="{!! url('/profile') !!}"><i class="fa icon-user"></i>Profile</a>
                 <a href="#">History</a>
             </div>
         </div>
@@ -41,7 +43,7 @@
                     @foreach($models as $model)
 
                         <div class="row property_card_client">
-                            <div class="col-lg-2 col-md-2 col-sm-12" onclick="viewDeal('{{ $model->m_id }}','{{ url('/viewdeal') }}')" style="cursor: pointer;">
+                            <div class="col-lg-2 col-md-2 col-sm-12" onclick="viewDeal('{{ $model->d_id }}','{{ url('/viewdeal') }}')" style="cursor: pointer;">
                                 <?php
                                     $img_arr = explode('|',$model->m_gallery);
                                     $count = sizeof($img_arr);
@@ -57,7 +59,7 @@
                                 
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-12 text-left">
-                                <h4 onclick="viewDeal('{{ $model->m_id }}','{{ url('/viewdeal') }}')" style="cursor: pointer;">{{ $model->m_title }}</h4>
+                                <h4 onclick="viewDeal('{{ $model->d_id }}','{{ url('/viewdeal') }}')" style="cursor: pointer;">{{ $model->m_title }}</h4>
                                 <p><span style="opacity: 0.5;">Deal : </span>RM{{ $str_d_value }}, {{ $model->h_type_title }}</p>
                                 <b>{{ $model->state_title }}</b>
                             </div>
@@ -83,6 +85,8 @@
 
                     {!! $models->links() !!}
 
+                    <?php $c = $models->count();  ?>
+
                 </div>
             </div>
             
@@ -90,7 +94,15 @@
     </div>
     <br><br><br>
 
-    @include('layouts.tranquilo-footer')
+     @if($c > 2)
+
+        @include('layouts.tranquilo-footer')
+
+    @else
+        <div class="tranquilo-push-bottom">
+            @include('layouts.tranquilo-footer')
+        </div>
+    @endif
 
     @include('layouts.tranquilo-core-scripts')
     

@@ -22,5 +22,8 @@ class VerifyCsrfToken extends Middleware
         '/accept',
         '/reject',
         '/review',
+        '/deletedeal',
     ];
 }
+
+// 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

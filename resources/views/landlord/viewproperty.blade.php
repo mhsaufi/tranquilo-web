@@ -44,23 +44,22 @@
             <div class="row" style="vertical-align: top;">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h4 class="property-header">{{ $model->m_title }}</h4>
-                    <small>posted on {{ $model->d_date }} by <b>{{ $model->name }}</b></small>
+                    <small>posted on {{ $model->created_at }} by <b>{{ $model->name }}</b></small>
                     <br><br>
                     <i class="fa icon-phone"></i> <span style="font-size: 20px;">{{ $model->phone_no }}</span><br>
-                    <i class="fa icon-briefcase"></i> <span style="font-size: 20px;">{{ $model->b_type_title }}</span><br>
                     <i class="fa icon-building"></i> <span style="font-size: 20px;">{{ $model->h_type_title }}</span><br>
                     <i class="fa icon-map-marker"></i> <span style="font-size: 20px;">{{ $model->m_address }}, {{ $model->state_title }}</span>
                     
                     <br><br><br>
                     <?php
-                        if(strlen($model->d_value) > 3){
-                            $d_value = $model->d_value/1000;
-                            $str_d_value = $d_value."K";
+                        if(strlen($model->m_price) > 3){
+                            $m_price = $model->m_price/1000;
+                            $str_m_price = $m_price."K";
                         }else{
-                            $str_d_value = $model->d_value;
+                            $str_m_price = $model->m_price;
                         }
                     ?>
-                    <p style="font-size: 20px;">Deal at RM{!! $str_d_value !!}</p>
+                    <p style="font-size: 20px;">Priced at RM{!! $str_m_price !!}</p>
                     @if($model->m_description == '')
                         {!! $model->m_description_html !!}
                     @else
@@ -69,32 +68,33 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
-                        @for($i=0;$i<$count;$i++)
-                            <li data-target="#myCarousel" data-slide-to="{!! $i !!}" class="active"></li>
-                        @endfor
-                      </ol>
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            @for($i=0;$i<$count;$i++)
+                                <li data-target="#myCarousel" data-slide-to="{!! $i !!}" class="active"></li>
+                            @endfor
+                        </ol>
 
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner">
-                        @foreach($img_arr as $img)
-                        <div class="item active">
-                          <img src="{{ url('/galleries/'.$model->m_id.'/'.$img) }}">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            @foreach($img_arr as $img)
+                            <div class="item active">
+                              <img src="{{ url('/galleries/'.$model->m_id.'/'.$img) }}">
+                            </div>
+                            @endforeach
+
+                            @if($count != 1)
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            @endif
                         </div>
-                        @endforeach
-
-                        @if($count != 1)
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        @endif
                     </div>
                     
                 </div>
@@ -103,7 +103,7 @@
         </div>
     </div>
     <br><br><br>
-
+    @include('layouts.tranquilo-footer')
 
     @include('layouts.tranquilo-core-scripts')
     

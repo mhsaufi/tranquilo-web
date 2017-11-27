@@ -18,9 +18,11 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
+                <a href="{!! url('/feed') !!}">Feed</a>
                 <a href="{!! url('/home') !!}">Property</a>
                 <a href="{!! url('/board') !!}" class="active">Applications</a>
                 <a href="{!! url('/dealboard') !!}">Deals</a>
+                <a href="{!! url('/profile') !!}"><i class="fa icon-user"></i>Profile</a>
                 <a href="#">History</a>
             </div>
         </div>

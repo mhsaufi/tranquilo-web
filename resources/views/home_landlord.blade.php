@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo | Registration</title>
+    <title>Tranquilo | MyProperty</title>
     
     @include('layouts.tranquilo-core-sheets')
 
@@ -20,9 +20,11 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
+                <a href="{!! url('/feed') !!}">Feed</a>
                 <a href="{!! url('/home') !!}" class="active">Property</a>
                 <a href="{!! url('/board') !!}">Applications</a>
                 <a href="{!! url('/dealboard') !!}">Deals</a>
+                <a href="{!! url('/profile') !!}"><i class="fa icon-user"></i>Profile</a>
                 <a href="#">History</a>
             </div>
         </div>

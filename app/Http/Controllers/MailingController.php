@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\SystemController as System;
+use App\Mail\TranquiloMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as Db;
 
@@ -37,6 +38,7 @@ class MailingController extends Controller
 					'message_status'=>1
 				]);
 
+
     }
 
     public function MailAccepted($app_id,$recipient){
@@ -59,6 +61,7 @@ class MailingController extends Controller
                     'message_content'=>$content,
                     'message_status'=>1
                 ]);
+
 
     }
 
@@ -84,6 +87,7 @@ class MailingController extends Controller
                     'message_content'=>$content,
                     'message_status'=>1
                 ]);
+
 
     }
 

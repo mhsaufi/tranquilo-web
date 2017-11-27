@@ -1,4 +1,4 @@
-$('#tranquilo_headereee').ready(function(){
+$('#tranquilo_header').ready(function(){
 	
 	function pullNotification()
 	{

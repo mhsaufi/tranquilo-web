@@ -131,7 +131,6 @@ class PropertyController extends Controller
     															'm_title'=>$title,
     															'm_year'=>$year,
     															'm_price'=>$m_price,
-    															'm_b_type'=>$b_type,
     															'm_h_type'=>$m_type,
     															'm_owner'=>Auth::id(),
     															'm_description'=>$description,
@@ -143,18 +142,49 @@ class PropertyController extends Controller
 
     public function viewProperty(Request $request){
 
-        $model_id = $request->input('m');
+        $deal_id = $request->input('m');
 
-        if(Auth::user()->role == 3){
+        $query =  "
+        SELECT * FROM tranquilo_model 
+        INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
+        INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id";
 
-            $model = Db::table('tranquilo_model')
-                    ->where('m_id',$model_id)
-                    ->join('tranquilo_users','tranquilo_model.m_owner','=','tranquilo_users.id')
-                    ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
-                    ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
-                    ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
-                    ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
-                    ->first();
+        $model_in = Db::raw('('.$query.') as model');
+
+        $model = Db::table('tranquilo_deal')
+                ->join($model_in,'tranquilo_deal.d_model','=','model.m_id')
+                ->join('tranquilo_business_type','tranquilo_deal.d_b_type','=','tranquilo_business_type.b_type_id')
+                ->join('tranquilo_users','tranquilo_deal.d_owner','=','tranquilo_users.id')
+                ->where('tranquilo_deal.d_id',$deal_id)
+                ->first();
+
+
+            $reviews_count = Db::table('tranquilo_review')
+                ->where('deal_id',$model->d_id)
+                ->where('review_status',2)
+                ->count();
+
+            if($reviews_count <> 0){
+
+                $reviews = Db::table('tranquilo_review')
+                    ->join('tranquilo_users','tranquilo_review.user_id','=','tranquilo_users.id')
+                    ->where('deal_id',$model->d_id)
+                    ->where('review_status',2)
+                    ->latest('review_date')
+                    ->get();
+
+
+                $data['reviews'] = $reviews;
+
+                foreach($reviews as $review){
+
+                    $ctd = Carbon::parse($review->review_date);
+                    $review->review_date = $ctd->toFormattedDateString();
+
+                }
+
+            }
+            
 
             // checked rated
 
@@ -166,9 +196,9 @@ class PropertyController extends Controller
                 $arr_rated_model = explode("|", $rate_record->rated_model);
                 $arr_rated_value = explode("|", $rate_record->avg_rated);
 
-                if(in_array($model_id,$arr_rated_model)){
+                if(in_array($model->m_id,$arr_rated_model)){
 
-                    $pos = array_search($model_id,$arr_rated_model);
+                    $pos = array_search($model->m_id,$arr_rated_model);
 
                     $data['model_rated'] = true;
                     $data['rated_value'] = $arr_rated_value[$pos];
@@ -178,6 +208,7 @@ class PropertyController extends Controller
                     $data['model_rated'] = false;
 
                 }
+                
             }else{
 
                 $data['model_rated'] = false;
@@ -188,33 +219,35 @@ class PropertyController extends Controller
             $created = Carbon::parse($model->d_date);
             $model->d_date = $created->toFormattedDateString();
 
-            $this->updateView($model_id,$model->m_view);
+            $this->updateView($model->m_id,$model->m_view);
 
             $data['model'] = $model;
+            $data['reviews_count'] = $reviews_count;
 
             return view ('client.viewproperty',$data);
 
-        }else{
+    }
 
-            $model = Db::table('tranquilo_model')
+    public function viewModel(Request $request){
+
+        $model_id = $request->input('m');
+
+         $model = Db::table('tranquilo_model')
                     ->where('m_id',$model_id)
                     ->join('tranquilo_users','tranquilo_model.m_owner','=','tranquilo_users.id')
-                    ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
                     ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
                     ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
-                    ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
                     ->first();
 
-            $created = Carbon::parse($model->d_date);
-            $model->d_date = $created->toFormattedDateString();
+        $created = Carbon::parse($model->created_at);
+        $model->created_at = $created->toFormattedDateString();
 
-            $this->updateView($model_id,$model->m_view);
+        // $this->updateView($model_id,$model->m_view);
 
-            $data['model'] = $model;
+        $data['model'] = $model;
 
-            return view ('landlord.viewproperty',$data);
+        return view ('landlord.viewproperty',$data);
 
-        }
     }
 
     public function rateProperty(Request $request){
@@ -271,6 +304,74 @@ class PropertyController extends Controller
             Db::table('tranquilo_bookmark')->insert(['bookmark_user'=>$user_id,'bookmark_deal'=>$deal_id]);
 
         }
+
+    }
+
+    public function viewPropertyLandlord(Request $request){
+
+        $model_id = $request->input('m');
+
+        $model = Db::table('tranquilo_model')
+                    ->where('m_id',$model_id)
+                    ->join('tranquilo_users','tranquilo_model.m_owner','=','tranquilo_users.id')
+                    ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
+                    ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
+                    ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
+                    ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
+                    ->first();
+
+        $reviews = Db::table('tranquilo_review')
+            ->join('tranquilo_users','tranquilo_review.user_id','=','tranquilo_users.id')
+            ->where('deal_id',$model->d_id)
+            ->where('review_status',2)
+            ->latest('review_date')
+            ->get();
+
+        foreach($reviews as $review){
+
+            $ctd = Carbon::parse($review->review_date);
+            $review->review_date = $ctd->toFormattedDateString();
+
+        }
+
+        // checked rated
+        $rate_record = Db::table('tranquilo_rating')->where('user_id',Auth::id())->first();
+        $rate_record_count = Db::table('tranquilo_rating')->where('user_id',Auth::id())->count();
+
+        if($rate_record_count <> 0){
+
+            $arr_rated_model = explode("|", $rate_record->rated_model);
+            $arr_rated_value = explode("|", $rate_record->avg_rated);
+
+            if(in_array($model_id,$arr_rated_model)){
+
+                $pos = array_search($model_id,$arr_rated_model);
+
+                $data['model_rated'] = true;
+                $data['rated_value'] = $arr_rated_value[$pos];
+
+            }else{
+
+                $data['model_rated'] = false;
+
+            }
+            
+        }else{
+
+            $data['model_rated'] = false;
+
+        }
+        
+
+        $created = Carbon::parse($model->d_date);
+        $model->d_date = $created->toFormattedDateString();
+
+        $this->updateView($model_id,$model->m_view);
+
+        $data['model'] = $model;
+        $data['reviews'] = $reviews;
+
+        return view ('landlord.landlordviewproperty',$data);
 
     }
 

@@ -63,6 +63,23 @@ class ApplicationController extends Controller
         return view('client.applyproperty',$data);
     }
 
+    public function applyPropertyLandlord(Request $request){
+
+        $d_id = $request->input('d');
+
+        $deal = Db::table('tranquilo_deal')
+                    ->where('d_id',$d_id)
+                    ->join('tranquilo_users','tranquilo_deal.d_owner','=','tranquilo_users.id')
+                    ->join('tranquilo_model','tranquilo_deal.d_model','=','tranquilo_model.m_id')
+                    ->join('tranquilo_business_type','tranquilo_deal.d_b_type','=','tranquilo_business_type.b_type_id')
+                    ->first();
+
+        $data['deal'] = $deal;
+
+        return view('landlord.applypropertylandlord',$data);
+
+    }
+
     public function apply(Request $request){
 
     	$installment = $request->input('installment');

@@ -16,6 +16,7 @@ Route::get('/aboutus',			'PublicController@about');
 Route::get('/contactus',		'PublicController@contact');
 Route::get('/property',			'PublicController@property');
 Route::get('/pullnotificationnumber', 'SystemController@unreadCounter');
+Route::get('/viewmodelp',		'PublicController@viewProperty');
 // Route::get('/',		'PublicController@index');
 
 Auth::routes();
@@ -35,13 +36,16 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/addproperty',		'HomeController@addProperty');
 		Route::post('/upload_gallery', 	'PropertyController@uploadGalleries');
 		Route::post('/checkout',		'PropertyController@checkOutDeal');
+		Route::get('/feed',				'DealController@landlordFeed');
 
 		Route::post('/apply',				'ApplicationController@apply');
 		Route::post('/cancelapplication',	'ApplicationController@cancel');
 
-		Route::get('/viewmodel',		'PropertyController@viewProperty');
+		Route::get('/viewmodel',		'PropertyController@viewModel');
 		Route::get('/viewmodelc',		'PropertyController@viewProperty');
+		Route::get('/viewmodelland',	'PropertyController@viewPropertyLandlord');
 		Route::get('/applyproperty',	'ApplicationController@applyProperty');
+		Route::get('/apply',			'ApplicationController@applyPropertyLandlord');
 		Route::post('/rateproperty',	'PropertyController@rateProperty');
 		Route::post('/bookmarkdeal',	'PropertyController@bookmarkDeal');
 
@@ -59,6 +63,11 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::post('/reject',			'ApplicationController@rejectApplication');
 		Route::post('/accept',			'ApplicationController@acceptApplication');
 		Route::post('/review',			'ApplicationController@reviewApplication');
+		Route::post('/postreview',		'DealController@addReview');
+
+		Route::get('/editdeal',			'DealController@editDeal');
+		Route::post('/updatedeal',		'DealController@editDealSave');
+		Route::post('/deletedeal',		'DealController@deleteDeal');
 });
 
 

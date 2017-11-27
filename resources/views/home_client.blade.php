@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tranquilo | Registration</title>
+    <title>Tranquilo | Property</title>
     @include('layouts.tranquilo-core-sheets')
     
 </head>
@@ -14,7 +14,6 @@
    
     @include('layouts.tranquilo-header')
 
-    @if(Auth::user()->role == '3')
     <header class="mini-header-user">
         <div class="row">
             <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
@@ -29,7 +28,6 @@
             </div>
         </div>
     </header>
-    @endif
     
     <br>
     <div class="row">
@@ -115,7 +113,7 @@
                     @foreach($models as $model)
 
                         <div class="row property_card_client">
-                            <div class="col-lg-2 col-md-2 col-sm-12" onclick="viewModel('{{ $model->m_id }}','{{ url('/viewmodelc') }}')" style="cursor: pointer;">
+                            <div class="col-lg-2 col-md-2 col-sm-12" onclick="viewModel('{{ $model->d_id }}','{{ url('/viewmodelc') }}')" style="cursor: pointer;">
                                 <?php
                                     $img_arr = explode('|',$model->m_gallery);
                                     $count = sizeof($img_arr);
@@ -167,7 +165,7 @@
                         <br>
                     @endforeach
 
-                    {!! $models->links() !!}
+                    {!! $models->appends(['from'=>$cond_from,'to'=>$cond_to,'h_type'=>$cond_h_type,'state'=>$cond_state,'rate_sort'=>$sort_rate,'date_sort'=>$sort_date,'price_sort'=>$sort_price,'view_sort'=>$sort_view,'model_count'=>$model_count])->links() !!}
 
                     <?php $c = $models->count(); ?>
 
@@ -193,7 +191,10 @@
         </div>
     @endif
 
-    @include('layouts.tranquilo-core-scripts')
+    <script src="myasset/js/jquery.js"></script>
+    <script src="myasset/js/bootstrap.min.js"></script>
+    <!-- <script src="myasset/js/main.js"></script> -->
+    <script src="myasset/js/tranquilo-system.js"></script>
     
     <script src="myasset/js/tranquilo-bookmark.js"></script>
     <script src="myasset/js/tranquilo-sort-plugin.js"></script>

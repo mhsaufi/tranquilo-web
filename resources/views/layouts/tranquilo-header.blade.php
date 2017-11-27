@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner" id="tranquilo_header">
+<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,6 +14,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{!! url('/') !!}"><i class="fa icon-home"></i>Home</a></li>
+                <li><a href="{!! url('/property') !!}">Properties</a></li>
                 <li><a href="{!! url('/aboutus') !!}">About Us</a></li>
                 <li><a href="{!! url('/contactus') !!}"><i class="fa icon-phone"></i>Contact</a></li>
                 @guest

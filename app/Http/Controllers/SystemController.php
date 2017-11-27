@@ -52,4 +52,12 @@ class SystemController extends Controller
 
         return $application;
     }
+
+    public function getUser($user){
+
+        $user = Db::table('tranquilo_users')->where('id',$user)->first();
+
+        return $user;
+
+    }
 }

@@ -48,7 +48,7 @@
                         <?php
                             $g_arr = explode('|',$deal->m_gallery);
                         ?>
-                        <div class="property_card" onclick="viewModel('{{ $deal->m_id }}','{{ url('/viewmodel') }}')">
+                        <div class="property_card" onclick="viewModel('{{ $deal->d_id }}','{{ url('/viewmodelc') }}')">
                             <div class="row property_card_header">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <img src="{{ url('/galleries/'.$deal->m_id.'/'.$g_arr[0]) }}" width="100%">
@@ -103,10 +103,15 @@
     @include('layouts.tranquilo-footer')
 
 
-    <script src="myasset/js/jquery.js"></script>
-    <script src="myasset/js/bootstrap.min.js"></script>
-    <script src="myasset/js/jquery.prettyPhoto.js"></script>
-    <script src="myasset/js/main.js"></script>
+    @include('layouts.tranquilo-core-scripts')
+
+    <script>
+        function viewModel(id,url){
+
+            window.location.replace(url+'?m='+id);
+
+        }
+    </script>
 
 </body>
 </html>
