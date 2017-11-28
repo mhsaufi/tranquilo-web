@@ -60,4 +60,12 @@ class SystemController extends Controller
         return $user;
 
     }
+
+    public function updatepassword(Request $request){
+
+        $pass = $request->input('ar');
+
+        Db::table('tranquilo_users')->where('id',Auth::id())->update(['password'=>bcrypt($pass)]);
+
+    }
 }

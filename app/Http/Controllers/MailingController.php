@@ -6,6 +6,15 @@ use App\Http\Controllers\SystemController as System;
 use App\Mail\TranquiloMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as Db;
+use Illuminate\Support\Facades\Mail;
+
+/*
+    |
+    | This class use SendGrid to send email
+    | current sendgrid account is a one-month-trial account
+    |
+
+*/
 
 class MailingController extends Controller
 {
@@ -27,7 +36,7 @@ class MailingController extends Controller
     	$content = "Your application for ".$application->m_title." on ".$application->application_date." had been reviewed by owner";
     	$content .= "<br><br><br>";
     	$content .= "<i class='fa icon-phone'></i>".$this->MailerDaemon()->phone_no;
-    	$content .= "<br><br><small><em>".$this->MailerDaemon()->email."</em></small>";
+    	$content .= "<br><br><br><small><em>".$this->MailerDaemon()->email."</em></small><br><br><br>";
 
     	Db::table('tranquilo_message')
     	->insert([
@@ -38,7 +47,12 @@ class MailingController extends Controller
 					'message_status'=>1
 				]);
 
+        Mail::send('mail.tranquilo_mail',['mail'=>$content], function ($message) {
 
+            $message->from('info@tranquilo.com', 'Tranquilo');
+
+            $message->to('habibmohdsaufi@gmail.com');
+        });
     }
 
     public function MailAccepted($app_id,$recipient){
@@ -61,6 +75,13 @@ class MailingController extends Controller
                     'message_content'=>$content,
                     'message_status'=>1
                 ]);
+
+        Mail::send('mail.tranquilo_mail',['mail'=>$content], function ($message) {
+
+            $message->from('info@tranquilo.com', 'Tranquilo');
+
+            $message->to('habibmohdsaufi@gmail.com');
+        });
 
 
     }
@@ -87,6 +108,13 @@ class MailingController extends Controller
                     'message_content'=>$content,
                     'message_status'=>1
                 ]);
+
+        Mail::send('mail.tranquilo_mail',['mail'=>$content], function ($message) {
+
+            $message->from('info@tranquilo.com', 'Tranquilo');
+
+            $message->to('habibmohdsaufi@gmail.com');
+        });
 
 
     }

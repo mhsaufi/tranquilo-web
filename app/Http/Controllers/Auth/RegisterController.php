@@ -40,10 +40,23 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return TranquiloUsers::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        if($data['role']){
+
+            return TranquiloUsers::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'role' => $data['role'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+        }else{
+
+            return TranquiloUsers::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+        }
     }
 }

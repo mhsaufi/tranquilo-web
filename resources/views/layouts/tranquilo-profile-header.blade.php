@@ -9,7 +9,6 @@
                     <i class="fa icon-envelope"></i> 
                     Message <span class="badge" id="tranquilo_badge"></span>
                 </a>
-                <a href="{!! url('/reaches') !!}" <?php if($a == 3){echo 'class="active"';} ?>>Reaches</a>
                 <a href="{!! url('/home') !!}"><i class="fa icon-th-large"></i> Tranquilo Panel</a>
             </div>
         </div>

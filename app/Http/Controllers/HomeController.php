@@ -133,9 +133,18 @@ class HomeController extends Controller
             $state = Db::table('tranquilo_state')->orderBy('state_title')->get();
             $h_type = Db::table('tranquilo_house_type')->orderBy('h_type_title')->get();
 
-            $bookmark_record = Db::table('tranquilo_bookmark')->where('bookmark_user',Auth::id())->first();
+            $bookmark_record_count = Db::table('tranquilo_bookmark')->where('bookmark_user',Auth::id())->count();
 
-            $bookmarked = explode("|", $bookmark_record->bookmark_deal);
+            if($bookmark_record_count <> 0){
+
+                $bookmark_record = Db::table('tranquilo_bookmark')->where('bookmark_user',Auth::id())->first();
+                $bookmarked = explode("|", $bookmark_record->bookmark_deal);
+
+            }else{
+
+                $bookmarked = array(0);
+
+            }
 
             $data['model_count'] = $model_count;
             $data['bookmarked'] = $bookmarked;
@@ -167,11 +176,28 @@ class HomeController extends Controller
 
             return view('home_landlord',$data);
         }
+        if(Auth::user()->role == 1){
+
+            echo "ADMIN IS REGISTERED AND THE WHOLE AUTHENTICATION SYSTEM IS ALTERED CUSTOMIZED";
+
+        }
     }
 
     public function profile(){
 
-        return view('profilepage');
+        $users = Db::table('tranquilo_users')
+                ->join('tranquilo_users_role','tranquilo_users.role','=','tranquilo_users_role.role_id')
+                ->join('tranquilo_users_status','tranquilo_users.status','=','tranquilo_users_status.user_status_id')
+                ->leftJoin('tranquilo_state','tranquilo_users.state','=','tranquilo_state.state_id')
+                ->where('tranquilo_users.id',Auth::id())
+                ->first();
+
+        $states = Db::table('tranquilo_state')->get();
+
+        $data['users'] = $users;
+        $data['state'] = $states;
+
+        return view('profilepage',$data);
     }
 
     public function addProperty(){
@@ -256,10 +282,32 @@ class HomeController extends Controller
             }
         }
 
-        
-
-
         return $info_updated;
+    }
+
+    public function profilePicture(){
+
+        return view('profilepicture');
+    }
+
+    public function newProfilePicture(Request $request){
+
+        $files = $request->file('file');
+        $id = Auth::id();
+
+        foreach($files as $file)
+        {
+            $file_name = $file->getClientOriginalName();
+
+            $file_store = $file->storeAs('users/'.$id,$file_name); // Store File
+
+            if($file_store){
+
+                Db::table('tranquilo_users')->where('id',$id)->update(['img'=>$file_name]);
+
+            }
+
+        }
     }
 
     public function listMessages(){

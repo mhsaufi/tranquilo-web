@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/reject',
         '/review',
         '/deletedeal',
+        '/updatepassword',
     ];
 }
 

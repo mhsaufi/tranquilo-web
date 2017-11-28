@@ -11,5 +11,5 @@ class TranquiloUsers extends Authenticatable
 
     public $table = 'tranquilo_users';
 
-    protected $fillable = ['name','phone_no','email','address','state','status','img','password','remember_token','created_at'];
+    protected $fillable = ['name','phone_no','email','role','address','state','status','img','password','remember_token','created_at'];
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Nov 27, 2017 at 02:33 PM
+-- Generation Time: Nov 28, 2017 at 04:30 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -56,11 +56,11 @@ CREATE TABLE `tranquilo_application` (
 --
 
 INSERT INTO `tranquilo_application` (`application_id`, `application_deal`, `application_installment`, `application_description`, `application_client`, `application_status`, `application_update_date`, `application_date`) VALUES
-(1, 5, 4, 'YOLO', 2, 4, '2017-11-27 13:19:59', '2017-11-21 12:20:48'),
-(6, 5, 4, 'YOLO', 2, 4, '2017-11-24 18:29:12', '2017-11-21 12:24:38'),
-(7, 2, 1, 'YOLO 2', 2, 4, '2017-11-24 18:28:53', '2017-11-21 12:26:03'),
-(8, 2, 1, 'YOLO 2', 2, 4, '2017-11-24 20:41:55', '2017-11-21 12:26:35'),
-(9, 1, 300, 'Hope approved', 2, 4, '2017-11-27 13:14:19', '2017-11-27 02:25:38');
+(1, 5, 4, 'YOLO', 2, 1, '2017-11-28 06:40:14', '2017-11-21 12:20:48'),
+(6, 5, 4, 'YOLO', 2, 1, '2017-11-28 06:40:11', '2017-11-21 12:24:38'),
+(7, 2, 1, 'YOLO 2', 2, 1, '2017-11-28 06:03:12', '2017-11-21 12:26:03'),
+(8, 2, 1, 'YOLO 2', 2, 1, '2017-11-28 06:03:15', '2017-11-21 12:26:35'),
+(9, 1, 300, 'Hope approved', 2, 2, '2017-11-28 06:40:27', '2017-11-27 02:25:38');
 
 -- --------------------------------------------------------
 
@@ -253,7 +253,16 @@ INSERT INTO `tranquilo_message` (`message_id`, `message_sender`, `message_recipi
 (19, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:21:41'),
 (20, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:22:20'),
 (21, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:23:03'),
-(22, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:29:55');
+(22, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 has been rejected by owner<br>We apologized for the declined. Try and look for more property on our site.<br>Thank you.<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-27 13:29:55'),
+(23, 3, 2, 'Tranquilo Application', 'Your application for Setia Villa S6 on Nov 27, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:03:36'),
+(24, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:15:07'),
+(25, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:16:10'),
+(26, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:17:03'),
+(27, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:25:56'),
+(28, 3, 2, 'Tranquilo Application', 'Your application for Setia Villa S6 on Nov 27, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:27:08'),
+(29, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><small><em>customer@tranquiloproperty.net</em></small>', 1, '2017-11-28 06:28:15'),
+(30, 3, 2, 'Tranquilo Application', 'Your application for Villa Sungai Ramal on Nov 21, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><br><small><em>customer@tranquiloproperty.net</em></small><br><br><br>', 1, '2017-11-28 06:36:42'),
+(31, 3, 2, 'Tranquilo Application', 'Your application for Setia Villa S6 on Nov 27, 2017 had been reviewed by owner<br><br><br><i class=\'fa icon-phone\'></i>0325567844<br><br><br><small><em>customer@tranquiloproperty.net</em></small><br><br><br>', 2, '2017-11-28 06:40:23');
 
 -- --------------------------------------------------------
 
@@ -308,10 +317,10 @@ CREATE TABLE `tranquilo_model` (
 --
 
 INSERT INTO `tranquilo_model` (`m_id`, `m_title`, `m_year`, `m_price`, `m_b_type`, `m_h_type`, `m_owner`, `m_description`, `m_description_html`, `m_b_type_2`, `m_gallery`, `m_gallery_key`, `m_state`, `m_address`, `m_view`, `m_rate_value`, `m_rate_by`, `created_at`) VALUES
-(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 178, 2, 1, '2017-11-27 10:38:40'),
+(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 179, 2, 1, '2017-11-27 10:38:40'),
 (2, 'Naratha Semi Houses', '3', 654000, 3, 3, 1, NULL, '', NULL, 'semi-d-house-for-sell-RM-980k-new_9.jpg', '8370UQT2H6ADR9ZX1JOM', 14, 'Jalan Keramat 8 Datuk Keramat', 43, 0, 0, '2017-11-27 10:38:40'),
-(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 31, 0, 0, '2017-11-27 10:38:40'),
-(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 105, 0, 0, '2017-11-27 10:38:40'),
+(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 32, 0, 0, '2017-11-27 10:38:40'),
+(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 107, 0, 0, '2017-11-27 10:38:40'),
 (5, 'Villa Sungai Ramal', '2', 350000, 3, 7, 1, 'Villa Sungai Ramal, Jalan Sungai Besi, Sungai Ramal Dalam', '<p><br></p>', NULL, 'AAEAAQAAAAAAAAgoAAAAJGM2NWQ2NjU3LWY5OWQtNDRhOS1hZmNiLWQ1ZWM1OThjYWRlNQ.jpg', '0VMLODKPEZHBQR6S9CWT', 14, 'Jalan Sungai Besi, Sungai Ramal Dalam', 84, 0, 0, '2017-11-27 10:38:40'),
 (6, 'Suria Minton VIlla', '3', 1788653, NULL, 7, 1, 'Nothing to describe', '<p><br></p>', NULL, 'PPHO.2021764.V550.jpg', 'K295DY6PFZTB0JU3WREN', 1, 'Jalan Suria KLCC', 31, 3, 1, '2017-11-27 10:38:40');
 
@@ -447,8 +456,9 @@ CREATE TABLE `tranquilo_users` (
 
 INSERT INTO `tranquilo_users` (`id`, `name`, `phone_no`, `email`, `address`, `state`, `status`, `role`, `img`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Ahmad', '0135448612', 'ahmad@gmail.com', NULL, NULL, 1, 2, NULL, '$2y$10$q7bL5jNe3HbyfmKzu0T3FO0XqTL/LDPJr/relRR.mIjqgOBnf510.', '', '2017-11-17 07:00:39', '2017-11-17 07:00:39'),
-(2, 'piyad', NULL, 'habibmohdsaufi@gmail.com', NULL, NULL, 1, 3, NULL, '$2y$10$iGt96IhSYbIEPS171./lBegw0hYTBge650atSBpoAVRBUV9E9S6OG', '', '2017-11-18 11:51:32', '2017-11-18 11:51:32'),
-(3, 'Tranquilo Property', '0325567844', 'customer@tranquiloproperty.net', NULL, 2, 1, 3, NULL, 'tranquilo123', NULL, '2017-11-21 22:00:00', NULL);
+(2, 'piyad', NULL, 'habibmohdsaufi@gmail.com', NULL, NULL, 1, 3, 'fifapc.ico', '$2y$10$E4mCAUl/s3zUUq4wCmTNk.C1cHmyxyeNK97fyU2o.lWPlYVgom9c.', '', '2017-11-18 11:51:32', '2017-11-18 11:51:32'),
+(3, 'Tranquilo Property', '0325567844', 'customer@tranquiloproperty.net', NULL, 2, 1, 3, NULL, '', NULL, '2017-11-21 22:00:00', NULL),
+(6, 'Admin', NULL, 'admin@tranquilo.com', NULL, NULL, 1, 1, NULL, '$2y$10$6Ik29NBb3uDEQtvaeEXFJ.gnHWmpfOslxa2tem6/b6hrpf8eusnzu', '', '2017-11-28 01:20:59', '2017-11-28 01:20:59');
 
 -- --------------------------------------------------------
 
@@ -470,6 +480,27 @@ INSERT INTO `tranquilo_users_role` (`role_id`, `role_title`, `role_status`) VALU
 (1, 'Admin', 1),
 (2, 'Landlord', 1),
 (3, 'Users', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tranquilo_users_status`
+--
+
+CREATE TABLE `tranquilo_users_status` (
+  `user_status_id` int(11) NOT NULL,
+  `user_status_title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_users_status`
+--
+
+INSERT INTO `tranquilo_users_status` (`user_status_id`, `user_status_title`) VALUES
+(1, 'Active'),
+(2, 'Locked'),
+(3, 'Blacklisted'),
+(4, 'Inactive');
 
 --
 -- Indexes for dumped tables
@@ -578,6 +609,12 @@ ALTER TABLE `tranquilo_users_role`
   ADD PRIMARY KEY (`role_id`);
 
 --
+-- Indexes for table `tranquilo_users_status`
+--
+ALTER TABLE `tranquilo_users_status`
+  ADD PRIMARY KEY (`user_status_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -625,7 +662,7 @@ ALTER TABLE `tranquilo_house_type`
 -- AUTO_INCREMENT for table `tranquilo_message`
 --
 ALTER TABLE `tranquilo_message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tranquilo_message_status`
 --
@@ -660,12 +697,17 @@ ALTER TABLE `tranquilo_state`
 -- AUTO_INCREMENT for table `tranquilo_users`
 --
 ALTER TABLE `tranquilo_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tranquilo_users_role`
 --
 ALTER TABLE `tranquilo_users_role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tranquilo_users_status`
+--
+ALTER TABLE `tranquilo_users_status`
+  MODIFY `user_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

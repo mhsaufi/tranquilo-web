@@ -17,7 +17,6 @@ Route::get('/contactus',		'PublicController@contact');
 Route::get('/property',			'PublicController@property');
 Route::get('/pullnotificationnumber', 'SystemController@unreadCounter');
 Route::get('/viewmodelp',		'PublicController@viewProperty');
-// Route::get('/',		'PublicController@index');
 
 Auth::routes();
 
@@ -27,6 +26,12 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/home', 			'HomeController@index')->name('home');
 		Route::get('/profile',			'HomeController@profile');
 		Route::post('/updateprofile',	'HomeController@updateProfile');
+		Route::get('/profilepicture',	'HomeController@profilePicture');
+		Route::post('/uploaddp',		'HomeController@newProfilePicture');
+		Route::get('/passwordchange',function(){
+			return view('passwordchange');
+		});
+		Route::post('/updatepassword',	'SystemController@updatepassword');
 
 		Route::get('/message',			'HomeController@listMessages');
 		Route::get('/readmail',			'HomeController@readMail');
@@ -68,10 +73,29 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/editdeal',			'DealController@editDeal');
 		Route::post('/updatedeal',		'DealController@editDealSave');
 		Route::post('/deletedeal',		'DealController@deleteDeal');
+
 });
 
 
 Route::get('galleries/{id}/{filename}', function ($id,$filename)
 {
     return Storage::get('galleries/'.$id.'/'.$filename);
+});
+
+Route::get('avatar/{id}/{filename}', function ($id,$filename)
+{
+    return Storage::get('users/'.$id.'/'.$filename);
+});
+
+// Admin Section
+
+Route::get('/admin',			'AdminController@index');
+Route::get('/administrator',	'AdminController@register');
+Route::post('loginadmin',		'Auth\AdminLoginController@authenticate');
+Route::post('registeradmin', 	'Auth\AdminRegisterController@register');
+
+Route::group(['middleware'=>'auth'],function(){
+
+	Route::get('/dashboard',	'AdminController@home');
+
 });
