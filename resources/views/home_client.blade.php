@@ -24,7 +24,7 @@
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
                 <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
-                <a href="{!! url('/myhistory') !!}">History</a>
+                <!-- <a href="{!! url('/myhistory') !!}">History</a> -->
             </div>
         </div>
     </header>
@@ -129,7 +129,7 @@
                                 
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-12 text-left">
-                                <h4 onclick="viewModel('{{ $model->m_id }}','{{ url('/viewmodelc') }}')" style="cursor: pointer;">{{ $model->m_title }}</h4>
+                                <h4 onclick="viewModel('{{ $model->d_id }}','{{ url('/viewmodelc') }}')" style="cursor: pointer;">{{ $model->m_title }}</h4>
                                 <p><span style="opacity: 0.5;">Deal : </span>RM{{ $str_d_value }}, {{ $model->h_type_title }}</p>
                                 <b>{{ $model->state_title }}</b>
                             </div>

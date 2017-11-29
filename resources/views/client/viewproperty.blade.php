@@ -7,6 +7,14 @@
     
     @include('layouts.tranquilo-core-sheets')
 
+    <link rel="stylesheet" type="{!! asset('myasset/slideJS/css/slidejs.css') !!}" href="">
+
+    <style>
+        .slidesjs-pagination li a {
+            background-image: url('{!! asset('myasset/slideJS/img/pagination.png') !!}');
+        }
+    </style>
+
 </head>
 <body>
     
@@ -22,7 +30,7 @@
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
                 <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
-                <a href="{!! url('/myhistory') !!}">History</a>
+                <!-- <a href="{!! url('/myhistory') !!}">History</a> -->
             </div>
         </div>
     </header>
@@ -93,35 +101,38 @@
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                          <!-- Indicators -->
-                          <ol class="carousel-indicators">
-                            @for($i=0;$i<$count;$i++)
-                                <li data-target="#myCarousel" data-slide-to="{!! $i !!}" class="active"></li>
-                            @endfor
-                          </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                @foreach($img_arr as $img)
-                                <div class="item active">
-                                  <img src="{{ url('/galleries/'.$model->m_id.'/'.$img) }}">
+                        
+                        <div class="container">
+                            @if($count <= 1)
+                                <div class="tranquilo-carousel" 
+                                        style="background-image: url('{{ url('/galleries/'.$model->m_id.'/'.$img_arr[0]) }}');
+                                            border-radius: 20px;
+                                            height: 400px;
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            object-fit: fill;
+                                            background-position: center; ">
                                 </div>
-                                @endforeach
 
-                                @if($count != 1)
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                @endif
-                            </div>
+                            @else
+                                <div id="slides">
+                                    <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+                                    <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+                                    @foreach($img_arr as $img)
+                                        <div class="tranquilo-carousel" 
+                                        style="background-image: url('{{ url('/galleries/'.$model->m_id.'/'.$img) }}');
+                                            border-radius: 20px;
+                                            height: 400px;
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            object-fit: fill;
+                                            background-position: center; ">
+                                        </div>
+                                    @endforeach                            
+                                </div>
+                            @endif
                         </div>
+
                     </div>
                 </div>
 
@@ -171,12 +182,25 @@
 
     @include('layouts.tranquilo-core-scripts')
     
-    <script src="myasset/js/tranquilo-rate.js"></script>
-    <script src="myasset/js/tranquilo-review.js"></script>
+    <script src="{!! asset('myasset/js/tranquilo-rate.js') !!}"></script>
+    <script src="{!! asset('myasset/js/tranquilo-review.js') !!}"></script>
+    <script src="{!! asset('myasset/slideJS/js/jquery.slides.min.js') !!}"></script>
     <script>
+         $(function(){
+
+            $('#slides').slidesjs({
+                width: 1000,
+                height: 800,
+                navigation: false,
+                pagination: false
+            });
+
+        });
+
         function goToAddProperty(url){
             window.location.replace(url);
         }
+
         function applyProperty(d_id,url){
 
             url = url + '?d=' + d_id;

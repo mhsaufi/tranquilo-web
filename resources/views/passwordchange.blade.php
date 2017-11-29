@@ -24,12 +24,12 @@
             <b><a href="{{ url('/profile') }}">Profile</a></b> > Change password
             <br><br>
             <hr>
-            <div class="row profile-card">
+            <div class="row profile-card" style="height: 200px;">
 
                 <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12 col-centered">
                     <!-- Dropzone -->
-                        <input type="password" name="password" id="password" class="form-control" /><br>
-                        <input type="password" id="retype" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Old password" /><br>
+                        <input type="password" id="retype" class="form-control" placeholder="New password">
                         <span id="alert-msg"><em>Password not match!</em></span>
                         <span id="update-btn"><br><button class="btn btn-block btn-danger">Update password</button></span>
                 </div>

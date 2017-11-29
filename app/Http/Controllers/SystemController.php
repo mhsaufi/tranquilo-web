@@ -53,6 +53,14 @@ class SystemController extends Controller
         return $application;
     }
 
+    public function getApplicationLandlord($change_id){
+
+        $change_info = Db::table('tranquilo_permission_change')->where('change_id',$change_id)->first();
+
+        return $change_info;
+
+    }
+
     public function getUser($user){
 
         $user = Db::table('tranquilo_users')->where('id',$user)->first();
@@ -66,6 +74,27 @@ class SystemController extends Controller
         $pass = $request->input('ar');
 
         Db::table('tranquilo_users')->where('id',Auth::id())->update(['password'=>bcrypt($pass)]);
+
+    }
+
+    public function applyLandlord(){
+
+        Db::table('tranquilo_permission_change')->insert(['user_id'=>Auth::id(),'application_status'=>1]);
+
+    }
+
+    public function deactivation(){
+
+        return view('auth.deactivation');
+    }
+
+    public function deactivating(Request $request){
+
+        Db::table('tranquilo_users')->where('id',Auth::id())->update(['status'=>2]);
+
+        $request->session()->invalidate();
+
+        return redirect('logout');
 
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Nov 28, 2017 at 04:30 PM
+-- Generation Time: Nov 29, 2017 at 03:11 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -317,12 +317,33 @@ CREATE TABLE `tranquilo_model` (
 --
 
 INSERT INTO `tranquilo_model` (`m_id`, `m_title`, `m_year`, `m_price`, `m_b_type`, `m_h_type`, `m_owner`, `m_description`, `m_description_html`, `m_b_type_2`, `m_gallery`, `m_gallery_key`, `m_state`, `m_address`, `m_view`, `m_rate_value`, `m_rate_by`, `created_at`) VALUES
-(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 179, 2, 1, '2017-11-27 10:38:40'),
+(1, 'Setia Villa S6', '2', 560000, 5, 2, 1, '', '', NULL, 'Setia-Eco-Glades-Cyberjaya-2Sty-Semi-D-House-For-Rent-Cyberjaya-Malaysia.jpg', 'Z6BT1XJYW95IPACEUOQ3', 1, 'Jalan Gombak Setia, Gombak', 205, 2, 1, '2017-11-27 10:38:40'),
 (2, 'Naratha Semi Houses', '3', 654000, 3, 3, 1, NULL, '', NULL, 'semi-d-house-for-sell-RM-980k-new_9.jpg', '8370UQT2H6ADR9ZX1JOM', 14, 'Jalan Keramat 8 Datuk Keramat', 43, 0, 0, '2017-11-27 10:38:40'),
-(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 32, 0, 0, '2017-11-27 10:38:40'),
-(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 107, 0, 0, '2017-11-27 10:38:40'),
-(5, 'Villa Sungai Ramal', '2', 350000, 3, 7, 1, 'Villa Sungai Ramal, Jalan Sungai Besi, Sungai Ramal Dalam', '<p><br></p>', NULL, 'AAEAAQAAAAAAAAgoAAAAJGM2NWQ2NjU3LWY5OWQtNDRhOS1hZmNiLWQ1ZWM1OThjYWRlNQ.jpg', '0VMLODKPEZHBQR6S9CWT', 14, 'Jalan Sungai Besi, Sungai Ramal Dalam', 84, 0, 0, '2017-11-27 10:38:40'),
-(6, 'Suria Minton VIlla', '3', 1788653, NULL, 7, 1, 'Nothing to describe', '<p><br></p>', NULL, 'PPHO.2021764.V550.jpg', 'K295DY6PFZTB0JU3WREN', 1, 'Jalan Suria KLCC', 31, 3, 1, '2017-11-27 10:38:40');
+(3, 'Keramat Bayu', '3', 850000, 2, 2, 1, '', '<h2><b>Keramat bayu</b></h2><p>Jalan Keramat 7</p><h2><br></h2>', NULL, 'Best-Deal!-Semi-D-for-Sale-Jalan-Girang-Macpherson-Potong-Pasir-Singapore.jpg', 'NVD1RPZLUGYWTBMH0Q9C', 14, 'Jalan Keramat 7, Datok Keramat', 63, 0, 0, '2017-11-27 10:38:40'),
+(4, 'Sungai Besi Idaman', '5', 500, 2, 3, 1, 'Idaman Sungai Besi. Jalan Merbahaya', '', NULL, '566913_0_original9huS.jpg|Central-Residence-Jalan-Sungai-Besi-Sungai-Besi-Malaysia.jpg', 'J2NL5XSM176VC84AQIB3', 14, 'Jalan Sungai Besi, Sungai Besi 53300, Selangor', 202, 0, 0, '2017-11-27 10:38:40'),
+(5, 'Villa Sungai Ramal', '2', 350000, 3, 7, 1, 'Villa Sungai Ramal, Jalan Sungai Besi, Sungai Ramal Dalam', '', NULL, 'AAEAAQAAAAAAAAgoAAAAJGM2NWQ2NjU3LWY5OWQtNDRhOS1hZmNiLWQ1ZWM1OThjYWRlNQ.jpg', '0VMLODKPEZHBQR6S9CWT', 14, 'Jalan Sungai Besi, Sungai Ramal Dalam', 97, 0, 0, '2017-11-27 10:38:40'),
+(6, 'Suria Minton VIlla', '3', 1788653, NULL, 7, 1, 'Nothing to describe', '<p><br></p>', NULL, 'PPHO.2021764.V550.jpg|83789906.jpg|106046964.jpg', 'K295DY6PFZTB0JU3WREN', 1, 'Jalan Suria KLCC', 72, 3, 1, '2017-11-27 10:38:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tranquilo_permission_change`
+--
+
+CREATE TABLE `tranquilo_permission_change` (
+  `change_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `application_status` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tranquilo_permission_change`
+--
+
+INSERT INTO `tranquilo_permission_change` (`change_id`, `user_id`, `application_status`, `updated_at`, `created_at`) VALUES
+(1, 2, 3, '2017-11-29 05:00:22', '2017-11-29 04:16:15');
 
 -- --------------------------------------------------------
 
@@ -455,10 +476,11 @@ CREATE TABLE `tranquilo_users` (
 --
 
 INSERT INTO `tranquilo_users` (`id`, `name`, `phone_no`, `email`, `address`, `state`, `status`, `role`, `img`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ahmad', '0135448612', 'ahmad@gmail.com', NULL, NULL, 1, 2, NULL, '$2y$10$q7bL5jNe3HbyfmKzu0T3FO0XqTL/LDPJr/relRR.mIjqgOBnf510.', '', '2017-11-17 07:00:39', '2017-11-17 07:00:39'),
+(1, 'Ahmad', '0135448612', 'ahmad@gmail.com', 'No 24/7 Kampung Sungai Pusu, Gombak, 53300 Kuala Lumpur', 6, 2, 2, 'Capture.PNG', '$2y$10$q7bL5jNe3HbyfmKzu0T3FO0XqTL/LDPJr/relRR.mIjqgOBnf510.', '', '2017-11-17 07:00:39', '2017-11-17 07:00:39'),
 (2, 'piyad', NULL, 'habibmohdsaufi@gmail.com', NULL, NULL, 1, 3, 'fifapc.ico', '$2y$10$E4mCAUl/s3zUUq4wCmTNk.C1cHmyxyeNK97fyU2o.lWPlYVgom9c.', '', '2017-11-18 11:51:32', '2017-11-18 11:51:32'),
 (3, 'Tranquilo Property', '0325567844', 'customer@tranquiloproperty.net', NULL, 2, 1, 3, NULL, '', NULL, '2017-11-21 22:00:00', NULL),
-(6, 'Admin', NULL, 'admin@tranquilo.com', NULL, NULL, 1, 1, NULL, '$2y$10$6Ik29NBb3uDEQtvaeEXFJ.gnHWmpfOslxa2tem6/b6hrpf8eusnzu', '', '2017-11-28 01:20:59', '2017-11-28 01:20:59');
+(6, 'Admin', NULL, 'admin@tranquilo.com', NULL, NULL, 1, 1, NULL, '$2y$10$6Ik29NBb3uDEQtvaeEXFJ.gnHWmpfOslxa2tem6/b6hrpf8eusnzu', '', '2017-11-28 01:20:59', '2017-11-28 01:20:59'),
+(7, 'Aminah', NULL, 'aminah@gmail.com', NULL, NULL, 1, 3, '83789906.jpg', '$2y$10$tLe2TtJJtS8Whg1jKysFX.j4m2jL9G.bIoulkzxwGtmdvVWsoDIei', NULL, '2017-11-29 06:07:09', '2017-11-29 06:07:09');
 
 -- --------------------------------------------------------
 
@@ -573,6 +595,12 @@ ALTER TABLE `tranquilo_model`
   ADD PRIMARY KEY (`m_id`);
 
 --
+-- Indexes for table `tranquilo_permission_change`
+--
+ALTER TABLE `tranquilo_permission_change`
+  ADD PRIMARY KEY (`change_id`);
+
+--
 -- Indexes for table `tranquilo_rating`
 --
 ALTER TABLE `tranquilo_rating`
@@ -674,6 +702,11 @@ ALTER TABLE `tranquilo_message_status`
 ALTER TABLE `tranquilo_model`
   MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
+-- AUTO_INCREMENT for table `tranquilo_permission_change`
+--
+ALTER TABLE `tranquilo_permission_change`
+  MODIFY `change_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `tranquilo_rating`
 --
 ALTER TABLE `tranquilo_rating`
@@ -697,7 +730,7 @@ ALTER TABLE `tranquilo_state`
 -- AUTO_INCREMENT for table `tranquilo_users`
 --
 ALTER TABLE `tranquilo_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tranquilo_users_role`
 --

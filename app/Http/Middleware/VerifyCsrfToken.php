@@ -24,6 +24,8 @@ class VerifyCsrfToken extends Middleware
         '/review',
         '/deletedeal',
         '/updatepassword',
+        '/applying',
+        '/approvelandlordapply',
     ];
 }
 

@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{!! url('/') !!}">
+            <a class="navbar-brand" href="{!! url('/dashboard') !!}">
                 <img src="{!! asset('myasset/images/tranquilo_mini.png') !!}" width="40%">
             </a>
         </div>

@@ -40,7 +40,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        if($data['role']){
+        if(isset($data['role'])){
 
             return TranquiloUsers::create([
                 'name' => $data['name'],

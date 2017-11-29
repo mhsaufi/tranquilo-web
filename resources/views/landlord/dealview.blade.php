@@ -25,7 +25,7 @@
                 <a href="{!! url('/board') !!}">Applications</a>
                 <a href="{!! url('/dealboard') !!}" class="active">Deals</a>
                 <a href="{!! url('/profile') !!}"><i class="fa icon-user"></i>Profile</a>
-                <a href="#">History</a>
+                <!-- <a href="#">History</a> -->
             </div>
         </div>
     </header>

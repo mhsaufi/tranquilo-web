@@ -64,12 +64,12 @@ class PublicController extends Controller
             $query =  "
             SELECT * FROM tranquilo_model 
             INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
-            INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id 
-            INNER JOIN tranquilo_business_type ON tranquilo_model.m_b_type = tranquilo_business_type.b_type_id";
+            INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id";
 
             $model_in = Db::raw('('.$query.') as model');
 
             $query_model = Db::table('tranquilo_deal')
+                    ->join('tranquilo_business_type','tranquilo_deal.d_b_type','=','tranquilo_business_type.b_type_id')
                     ->join($model_in,'tranquilo_deal.d_model','=','model.m_id');
 
             $cond_from = '';
@@ -188,16 +188,21 @@ class PublicController extends Controller
 
     public function viewProperty(Request $request){
 
-        $model_id = $request->input('m');
+        $deal_id = $request->input('m');
 
-        $model = Db::table('tranquilo_model')
-                    ->where('m_id',$model_id)
-                    ->join('tranquilo_users','tranquilo_model.m_owner','=','tranquilo_users.id')
-                    ->join('tranquilo_deal','tranquilo_model.m_id','=','tranquilo_deal.d_model')
-                    ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')
-                    ->join('tranquilo_house_type','tranquilo_model.m_h_type','=','tranquilo_house_type.h_type_id')
-                    ->join('tranquilo_business_type','tranquilo_model.m_b_type','=','tranquilo_business_type.b_type_id')
-                    ->first();
+        $query =  "
+        SELECT * FROM tranquilo_model 
+        INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
+        INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id";
+
+        $model_in = Db::raw('('.$query.') as model');
+
+        $model = Db::table('tranquilo_deal')
+                ->join($model_in,'tranquilo_deal.d_model','=','model.m_id')
+                ->join('tranquilo_business_type','tranquilo_deal.d_b_type','=','tranquilo_business_type.b_type_id')
+                ->join('tranquilo_users','tranquilo_deal.d_owner','=','tranquilo_users.id')
+                ->where('tranquilo_deal.d_id',$deal_id)
+                ->first();
 
         $created = Carbon::parse($model->d_date);
         $model->d_date = $created->toFormattedDateString();
@@ -216,9 +221,8 @@ class PublicController extends Controller
 
         }
 
-
         $property = new Property;
-        $property->updateView($model_id,$model->m_view);
+        $property->updateView($model->m_id,$model->m_view);
 
         $data['model'] = $model;
         $data['reviews'] = $reviews;

@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo | Registration</title>
-    
+    <title>Tranquilo | Property</title>
+
     @include('layouts.tranquilo-core-sheets')
+
+    <link rel="stylesheet" type="{!! asset('myasset/slideJS/css/slidejs.css') !!}" href="">
+
+    <style>
+        .slidesjs-pagination li a {
+            background-image: url('{!! asset('myasset/slideJS/img/pagination.png') !!}');
+        }
+    </style>
 
 </head><!--/head-->
 <body>
@@ -20,10 +28,12 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
+                <a href="{!! url('/feed') !!}">Feed</a>
                 <a href="{!! url('/home') !!}" class="active">Property</a>
                 <a href="{!! url('/board') !!}">Applications</a>
                 <a href="{!! url('/dealboard') !!}">Deals</a>
-                <a href="#">History</a>
+                <a href="{!! url('/profile') !!}"><i class="fa icon-user"></i>Profile</a>
+                <!-- <a href="#">History</a> -->
             </div>
         </div>
     </header>
@@ -42,7 +52,7 @@
 
             ?>
             <div class="row" style="vertical-align: top;">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <h4 class="property-header">{{ $model->m_title }}</h4>
                     <small>posted on {{ $model->created_at }} by <b>{{ $model->name }}</b></small>
                     <br><br>
@@ -66,50 +76,89 @@
                         {!! $model->m_description !!}
                     @endif
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            @for($i=0;$i<$count;$i++)
-                                <li data-target="#myCarousel" data-slide-to="{!! $i !!}" class="active"></li>
-                            @endfor
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            @foreach($img_arr as $img)
-                            <div class="item active">
-                              <img src="{{ url('/galleries/'.$model->m_id.'/'.$img) }}">
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <div class="container">
+                        @if($count <= 1)
+                            <div class="tranquilo-carousel" 
+                                    style="background-image: url('{{ url('/galleries/'.$model->m_id.'/'.$img_arr[0]) }}');
+                                        border-radius: 10px; 
+                                        width: 700px;
+                                        height: 500px;
+                                        background-size: contain;
+                                        background-repeat: no-repeat;
+                                        object-fit: fill;
+                                        background-position: center; ">
                             </div>
-                            @endforeach
 
-                            @if($count != 1)
-                            <!-- Left and right controls -->
-                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            @endif
-                        </div>
+                        @else
+                            <div id="slides">
+                                <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+                                <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+                                @foreach($img_arr as $img)
+                                    <div class="tranquilo-carousel" 
+                                    style="background-image: url('{{ url('/galleries/'.$model->m_id.'/'.$img) }}');
+                                        border-radius: 10px; 
+                                        width: 700px;
+                                        height: 500px;
+                                        background-size: contain;
+                                        background-repeat: no-repeat;
+                                        object-fit: fill;
+                                        background-position: center; ">
+                                    </div>
+                                @endforeach                            
+                            </div>
+                        @endif
                     </div>
-                    
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button class="btn btn-default" onclick="editProperty('{{ url('/editproperty') }}','{{ $model->m_id }}')">
+                    <i class="fa icon-pencil"></i> Edit</button>
+                    <button class="btn btn-danger" onclick="deleteProperty('{{ url('/deleteproperty') }}','{{ $model->m_id }}')">
+                    <i class="fa icon-trash"></i> Delete</button>
+                </div>
+            </div>
         </div>
     </div>
     <br><br><br>
     @include('layouts.tranquilo-footer')
 
     @include('layouts.tranquilo-core-scripts')
+
+    <script src="{!! asset('myasset/slideJS/js/jquery.slides.min.js') !!}"></script>
     
     <script>
+
+        $(function(){
+
+            $('#slides').slidesjs({
+                width: 1000,
+                height: 800,
+                navigation: false,
+                pagination: false
+            });
+
+        });
+
         function goToAddProperty(url){
             window.location.replace(url);
+        }
+
+        function editProperty(url,m_id){
+
+            var edit_url = url + '?m=' + m_id;
+
+            window.location.replace(edit_url);
+
+        }
+
+        function deleteProperty(url,m_id){
+
+            var edit_url = url + '?m=' + m_id;
+
+            window.location.replace(edit_url);
+
         }
     </script>
 </body>

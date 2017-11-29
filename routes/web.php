@@ -65,6 +65,10 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/adddeal',			'DealController@newDeal');
 		Route::post('/postdeal',		'DealController@addNewDeal');
 
+		Route::get('/editproperty',		'PropertyController@editProperty');
+		Route::post('/newgallery',		'PropertyController@uploadGalleriesEdit');
+		Route::post('/updateproperty',	'PropertyController@updateProperty');
+
 		Route::post('/reject',			'ApplicationController@rejectApplication');
 		Route::post('/accept',			'ApplicationController@acceptApplication');
 		Route::post('/review',			'ApplicationController@reviewApplication');
@@ -73,6 +77,21 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/editdeal',			'DealController@editDeal');
 		Route::post('/updatedeal',		'DealController@editDealSave');
 		Route::post('/deletedeal',		'DealController@deleteDeal');
+
+		Route::get('/applylandlord', function(){
+
+			return view('landlordapply');
+
+		});
+
+		Route::get('/termandcondition',	function(){
+			return view('auth.termncondition');
+		});
+
+		Route::post('/applying',	'SystemController@applyLandlord');
+
+		Route::get('/deactivate',	'SystemController@deactivation');
+		Route::get('/deactivating',	'SystemController@deactivating');
 
 });
 
@@ -97,5 +116,7 @@ Route::post('registeradmin', 	'Auth\AdminRegisterController@register');
 Route::group(['middleware'=>'auth'],function(){
 
 	Route::get('/dashboard',	'AdminController@home');
+	Route::get('/permission',	'AdminController@permission');
+	Route::post('/approvelandlordapply',	'AdminController@approveLandlord');
 
 });

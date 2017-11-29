@@ -166,12 +166,12 @@ class DealController extends Controller
         $query =  "
         SELECT * FROM tranquilo_model 
         INNER JOIN tranquilo_state ON tranquilo_model.m_state = tranquilo_state.state_id 
-        INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id 
-        INNER JOIN tranquilo_business_type ON tranquilo_model.m_b_type = tranquilo_business_type.b_type_id";
+        INNER JOIN tranquilo_house_type ON tranquilo_model.m_h_type = tranquilo_house_type.h_type_id";
 
         $model_in = Db::raw('('.$query.') as model');
 
         $query_model = Db::table('tranquilo_deal')
+                ->join('tranquilo_business_type','tranquilo_deal.d_b_type','=','tranquilo_business_type.b_type_id')
                 ->join($model_in,'tranquilo_deal.d_model','=','model.m_id');
 
         $cond_from = '';
@@ -301,7 +301,6 @@ class DealController extends Controller
         $data['sort_view'] = $sort_view;
 
         return view('landlord.feed',$data);
-
     }
 
     public function editDeal(Request $request){
@@ -334,7 +333,6 @@ class DealController extends Controller
         $data['model'] = $model;
 
         return view('landlord.editdealform',$data);
-
     }
 
     public function editDealSave(Request $request){
@@ -360,7 +358,6 @@ class DealController extends Controller
                                                 'd_value'=>$deal,
                                                 'd_status'=>1
                                             ]);
-
     }
 
     public function deleteDeal(Request $request){
@@ -368,6 +365,5 @@ class DealController extends Controller
         $deal_id = $request->input('deal_id');
 
         Db::table('tranquilo_deal')->where('d_id',$deal_id)->delete();
-
     }
 }

@@ -21,9 +21,8 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="{!! url('/home') !!}" class="active">Tranquilo Users</a>
+                <a href="{!! url('/dashboard') !!}" class="active">Tranquilo Users</a>
                 <a href="{!! url('/permission') !!}">Permission Changes</a>
-                <a href="{!! url('/mybookmark') !!}">Bookmark</a>
                 <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
             </div>
         </div>

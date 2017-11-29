@@ -24,7 +24,7 @@
                 <a href="{!! url('/myapplication') !!}">Application</a>
                 <a href="{!! url('/mybookmark') !!}">Bookmark</a>
                 <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
-                <a href="{!! url('/myhistory') !!}">History</a>
+                <!-- <a href="{!! url('/myhistory') !!}">History</a> -->
             </div>
         </div>
     </header>

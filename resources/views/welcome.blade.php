@@ -84,9 +84,11 @@
                                                 <form action="{{ url('/property') }}" method="GET">
                                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                                         <input type="text" name="from" class="form-control" placeholder="From" />
+                                                        <br><br>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                                         <input type="text" name="to" class="form-control" placeholder="To" />
+                                                        <br><br>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                                         <select name="state" class="form-control">
@@ -95,9 +97,11 @@
                                                                 <option value="{!! $st->state_id !!}">{!! $st->state_title !!}</option>
                                                             @endforeach                                                        
                                                         </select>
+                                                        <br><br>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                                         <button class="tranquilo-btn"><i class="icon-search" style="margin-right: 10px;"></i>Find Property</button>
+                                                        <br><br>
                                                     </div>
                                                 </form>
                                             </div>
@@ -132,7 +136,7 @@
                 <div class="col-md-4 col-sm-6 text-left">
 
                     <div class="row homepage-special-model">
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                             @guest
                             <a href="{{ url('/viewmodelp?m='.$model->m_id ) }}">
                             @else
@@ -142,7 +146,7 @@
                             <div class="circular--landscape center" style="background-image: url({{ url('/galleries/'.$model->m_id.'/'.$g_arr[0]) }});background-size: cover;background-position: center;">
                             </div></a>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-5 col-xs-5">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                             <h4>{{ $model->m_title }}</h4>
                             <hr>
                             <p>{{ $model->m_address }}</p>
