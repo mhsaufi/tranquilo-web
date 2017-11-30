@@ -6,26 +6,23 @@
                     <div>
                         <ul class="arrow">
                             <li><a href="{{ url('/aboutus') }}">Company Overview</a></li>
-                            <li><a href="{{ url('/aboutus') }}">Meet The Team</a></li>
+                            <li><a href="{{ url('/developers') }}">Developers</a></li>
                             <li><a href="{{ url('/ourpartner') }}">Our Awesome Partners</a></li>
-                            <li><a href="{{ url('/faq') }}">Frequently Asked Questions</a></li>
-                            <li><a href="{{ url('/contactus') }}">Conatct Us</a></li>
-                            <li><a href="{{ url('/privacypolicy') }}">Privacy Policy</a></li>
-                            <li><a href="{{ url('/termofuse') }}">Terms of Use</a></li>
+                            <li><a href="{{ url('/contactus') }}">Contact Us</a></li>
                         </ul>
                     </div>
                 </div><!--/.col-md-3-->
 
                 <div class="col-md-4 col-sm-6">
-                    <h4>Latest Blog</h4>
+                    <h4>Latest News</h4>
                     <div>
                         <div class="media">
                             <div class="pull-left">
                                 <img src="images/blog/thumb1.jpg" alt="">
                             </div>
                             <div class="media-body">
-                                <span class="media-heading"><a href="#">Pellentesque habitant morbi tristique senectus</a></span>
-                                <small class="muted">Posted 17 Aug 2013</small>
+                                <span class="media-heading"><a href="#">Tranquilo is releasing their public API for developers to access property from their site</a></span>
+                                <small class="muted">Posted 17 Oct 2017</small>
                             </div>
                         </div>
                         <div class="media">
@@ -33,8 +30,8 @@
                                 <img src="images/blog/thumb2.jpg" alt="">
                             </div>
                             <div class="media-body">
-                                <span class="media-heading"><a href="#">Pellentesque habitant morbi tristique senectus</a></span>
-                                <small class="muted">Posted 13 Sep 2013</small>
+                                <span class="media-heading"><a href="#">Contractual agreement with Trivago for database exchange</a></span>
+                                <small class="muted">Posted 13 Aug 2017</small>
                             </div>
                         </div>
                         <div class="media">
@@ -42,8 +39,8 @@
                                 <img src="images/blog/thumb3.jpg" alt="">
                             </div>
                             <div class="media-body">
-                                <span class="media-heading"><a href="#">Pellentesque habitant morbi tristique senectus</a></span>
-                                <small class="muted">Posted 11 Jul 2013</small>
+                                <span class="media-heading"><a href="#">Brief course on AirBnb Management Centre</a></span>
+                                <small class="muted">Posted 11 Jul 2017</small>
                             </div>
                         </div>
                     </div>  

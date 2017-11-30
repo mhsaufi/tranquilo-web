@@ -21,10 +21,11 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="{!! url('/dashboard') !!}">Tranquilo Users</a>
-                <a href="{!! url('/permission') !!}" class="active">Permission Changes</a>
-                <a href="{!! url('/mybookmark') !!}">Bookmark</a>
-                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
+                <a href="{!! url('/admin/dashboard') !!}"><i class="fa icon-th-large"></i>Admin Panel</a>
+                <a href="{!! url('/admin/user') !!}"><i class="fa icon-user"></i>Tranquilo Users</a>
+                <a href="{!! url('/admin/permission') !!}" class="active"><i class="fa icon-unlock"></i>Permission Changes</a>
+                <a href="{!! url('/admin/propertyrecord') !!}"><i class="fa icon-home"></i>Tranquilo Properties</a>
+                <a href="{!! url('/admin/dealsrecord') !!}"><i class="fa icon-briefcase"></i>Deals On Tranquilo</a>
             </div>
         </div>
     </header>
@@ -47,7 +48,7 @@
                         </thead>
                         <tbody>
                             @foreach($applications as $app)
-                                <tr>
+                                <tr class="admin_tbl_record">
                                     <td>{{ $app->change_id }}</td>
                                     <td>{{ $app->email }}</td>
                                     <td>{{ $app->name }}</td>

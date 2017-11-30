@@ -228,6 +228,6 @@ class PublicController extends Controller
         $data['reviews'] = $reviews;
 
         return view ('public.viewproperty',$data);
-
     }
+
 }

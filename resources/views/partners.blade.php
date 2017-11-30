@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo Property</title>
+    <title>Tranquilo Partners</title>
 
     @include('layouts.tranquilo-core-sheets')
 
@@ -75,29 +75,35 @@
     <section>
         <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center" id="logodesc">
-                        <img src="{{ asset('myasset/images/tranquilo.png') }}" width="50%">
-                        <hr>
-                        <p>We provide service for people who have a problem in searching,
-                        renting and advertising house. Throughout this project, involved contributor or
-                        an organization which is Mosque community. This system is actually to help
-                        Muslims community to find and rent suitable house nearby them. Furthermore, this
-                        system also opens big chance for helping Muslims community to do business and
-                        uphold Muslims tradition (Prophet&#8217;s Sunnah) indirectly. </p>
+                <h3>Our Awesome Partners</h3>
+                <hr>
+                <div class="row tranquilo-partner-card">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/airbnb.png') }}')"></div>
                     </div>
-
-                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 text-left" id="logodesc">
-                        <img src="{{ asset('myasset/images/airbnb.jpg') }}" width="100%">
-                        <hr>
-                        <p>Our team has been participating with AirBnb development career since 2012 to make sure
-                        Tranquilo are able to achieve the offical standard in property and land management.
-                        We will continuously participating to keep on developing more for Tranquilo</p>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/trivago.png') }}')"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/bankislam.png') }}')"></div>
                     </div>
                 </div>
+                <div class="row tranquilo-partner-card">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/uem.png') }}')"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/airasia.png') }}')"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="tranquilo-partner-images" style="background-image: url('{{ asset('/myasset/images/partners/simedarby.png') }}')"></div>
+                    </div>
+                </div>
+
             </div>
         </div>        
     </section>
+
 
     <br><br><br>
 
@@ -106,5 +112,6 @@
     @include('layouts.tranquilo-footer')
 
     @include('layouts.tranquilo-core-scripts')
+
 </body>
 </html>

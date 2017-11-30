@@ -21,9 +21,11 @@
                 
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-left">
-                <a href="{!! url('/dashboard') !!}" class="active">Tranquilo Users</a>
-                <a href="{!! url('/permission') !!}">Permission Changes</a>
-                <a href="{!! url('/profile') !!}">Profile <span class="badge" id="tranquilo_badge"></span></a>
+                <a href="{!! url('/admin/dashboard') !!}" class="active"><i class="fa icon-th-large"></i>Admin Panel</a>
+                <a href="{!! url('/admin/user') !!}"><i class="fa icon-user"></i>Tranquilo Users</a>
+                <a href="{!! url('/admin/permission') !!}"><i class="fa icon-unlock"></i>Permission Changes</a>
+                <a href="{!! url('/admin/propertyrecord') !!}"><i class="fa icon-home"></i>Tranquilo Properties</a>
+                <a href="{!! url('/admin/dealsrecord') !!}"><i class="fa icon-briefcase"></i>Deals On Tranquilo</a>
             </div>
         </div>
     </header>
@@ -32,83 +34,129 @@
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-centered">
             <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 dashboard_report_card wet-asphalt" onclick="jumpTo('{{ url('/admin/user') }}')">
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="color: white;">
+                            <h4><i class="fa icon-user"></i></h4>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                            <h5>{{ $users }} Registered Users</h5>
+                        </div>
+                    </div>
+                </div>
+               <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 dashboard_report_card nephritis" onclick="jumpTo('{{ url('/admin/propertyrecord') }}')">
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="color: white;">
+                            <h4><i class="fa icon-home"></i></h4>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                            <h5>{{ $properties }} Properties</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 dashboard_report_card turquoise" onclick="jumpTo('{{ url('/admin/dealsrecord') }}')">
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="color: white;">
+                            <h4><i class="fa icon-briefcase"></i></h4>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                            <h5>{{ $deals }} Deals</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <h4>Display Model</h4>
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
+                        <select class="form-control" id="model" name="model">
+                            @foreach($models as $m)
+                                <option value="{{ $m->m_id }}">{{ $m->m_title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <div id="display_model_area">
+                            <div id="model_img" class="circular--landscape center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <h3 id="m_title"></h3>
+                        <p id="m_address"></p>
+                    </div>
+                </div>
+            </div>
 
-                @if($r_count != 0)
-                    <table class="table" style="background-color: white;border-radius: 10px;padding: 20px 20px!important;">
+            <div class="row">
+                <h4>Display Review</h4>
+                <div class="row">
+                    <table class="table" style="background-color: white;">
                         <thead>
                             <tr>
                                 <th>IDS</th>
-                                <th>Email</th>
-                                <th>Name</th>
-                                <th>Permission</th>
-                                <th>Registered On</th>
-                                <th>Status</th>
+                                <th>Review</th>
+                                <th>Users</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $u)
-                                <tr>
-                                    <td>{{ $u->id }}</td>
-                                    <td>{{ $u->email }}</td>
-                                    <td>{{ $u->name }}</td>
-                                    <td>{{ $u->role_title }}</td>
-                                    <td>{{ $u->created_at }}</td>
-                                    <td>
-                                        
-                                        <select name="status" id="status" class="form-control">
-                                            @foreach($status as $s)
-                                                @if($u->status == $s->user_status_id)
-                                                    <option value="{{ $s->user_status_id }}" selected="selected">{{ $s->user_status_title }}</option>
-                                                @else
-                                                    <option value="{{ $s->user_status_id }}">{{ $s->user_status_title }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-
-                                    </td>
-                                </tr>
+                            @foreach($reviews as $review)
+                            <tr>
+                                <td>{{ $review->review_id }}</td>
+                                <td>{{ $review->review_content }}</td>
+                                <td>{{ $review->name }}</td>
+                                <td>{{ $review->review_status_title }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->links() }}
-                @else
-                    <h4>No users is currently using this system. So sad bro</h4>
-
-                @endif
-
+                </div>
             </div>
         </div>
     </div>
     <br><br><br>
 
-    <div class="tranquilo-push-bottom">
-        @include('layouts.tranquilo-footer')
-    </div>
+
+    @include('layouts.tranquilo-footer')
+
 
 
     @include('layouts.tranquilo-core-scripts')
     
-    <script src="myasset/js/tranquilo-bookmark.js"></script>
-    <script src="myasset/js/tranquilo-sort-plugin.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#sorting_board').hide();
+        function jumpTo(url){
 
-            if($('#sort_check:checked').length > 0){
+            window.location.replace(url);
 
-                $("#sorting_board").show();
+        }
 
-            }
+        $('#model').change(function(){
 
-            if($('#sort_check:checked').length == 0){
+            var model = $('#model :selected').val();
+            var url = '{{ url('/api/model') }}'+'?m='+model;
 
-                $('#sorting_board').hide();
-            }
+            $.get(url,function(data){
+
+                var obj = JSON.parse(data);
+
+                var images = obj.m_gallery;
+
+                var img_arr = images.split('|');
+
+                var img_url = '{{ url('/galleries') }}'+'/'+obj.m_id+'/'+img_arr[0];
+
+                $('#model_img').css('background-size','cover');
+                $('#model_img').css('background-position','center');
+                $('#model_img').css('background-image','url('+img_url+')');
+
+                $('#m_title').html(obj.m_title);
+                $('#m_address').html(obj.m_address);
+
+            });
         });
 
-        function viewModel(id,url){
-            window.location.replace(url+'?m='+id);
-        }
     </script>
 </body>
 </html>

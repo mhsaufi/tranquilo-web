@@ -27,8 +27,16 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="{!! url('/') !!}"><i class="fa icon-home"></i>Home</a></li>
-                    <li><a href="{!! url('/property') !!}">Properties</a></li>
-                    <li><a href="{!! url('/aboutus') !!}">About Us</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown">
+                            <i class="fa icon-random"></i>Explore <i class="icon-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{!! url('/ourpartner') !!}">Our Partners</a></li>
+                            <li><a href="{!! url('/developers') !!}">Developers</a></li>
+                            <li><a href="{!! url('/aboutus') !!}">About Us</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{!! url('/property') !!}"><i class="fa icon-briefcase"></i> Our Deals</a></li>
                     <li><a href="{!! url('/contactus') !!}"><i class="fa icon-phone"></i>Contact</a></li>
                     @guest
                     <li class="dropdown">

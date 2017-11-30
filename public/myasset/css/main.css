@@ -956,9 +956,7 @@ ul.star li::before,
 ul.rss li::before {
   margin-right: 5px;
 }
-ul.arrow li::before {
-  content: "\f105";
-}
+
 ul.arrow-double li::before {
   content: "\f101";
 }
@@ -1470,7 +1468,7 @@ background-color:   #d7dbdd!important; }
 }
 
 .view_property_card {
-  padding: 30px 20px;
+  padding: 20px 20px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 1px 1px 2px grey;
@@ -1535,3 +1533,43 @@ background-color:   #d7dbdd!important; }
   line-height: 20px;
 }
 
+.admin_tbl_record {
+  cursor: pointer;
+}
+
+.admin_tbl_record:hover {
+  background-color: #f5f5f5;
+}
+
+.dashboard_report_card {
+  color: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px grey;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.developers_desc {
+  font-size: 20px;
+  font-family: Hoefler Text, Baskerville Old Face, Garamond, Times New Roman, serif;
+}
+
+.btn-get-started{
+  color: white;
+  background-color: #30a510;
+}
+
+.btn-get-started:hover{
+  color: white;
+  background-color: #37ba13;
+}
+
+.tranquilo-partner-images{
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: fill;
+  background-position: center;
+}

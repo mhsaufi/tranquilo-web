@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tranquilo Property</title>
+    <title>Tranquilo Developers</title>
 
     @include('layouts.tranquilo-core-sheets')
 
@@ -75,29 +75,24 @@
     <section>
         <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-centered">
+                
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center" id="logodesc">
-                        <img src="{{ asset('myasset/images/tranquilo.png') }}" width="50%">
-                        <hr>
-                        <p>We provide service for people who have a problem in searching,
-                        renting and advertising house. Throughout this project, involved contributor or
-                        an organization which is Mosque community. This system is actually to help
-                        Muslims community to find and rent suitable house nearby them. Furthermore, this
-                        system also opens big chance for helping Muslims community to do business and
-                        uphold Muslims tradition (Prophet&#8217;s Sunnah) indirectly. </p>
-                    </div>
-
-                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 text-left" id="logodesc">
-                        <img src="{{ asset('myasset/images/airbnb.jpg') }}" width="100%">
-                        <hr>
-                        <p>Our team has been participating with AirBnb development career since 2012 to make sure
-                        Tranquilo are able to achieve the offical standard in property and land management.
-                        We will continuously participating to keep on developing more for Tranquilo</p>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                      <img src="{{ asset('/myasset/images/developers.png') }}" width="70%"><br>
+                      <h2 class="section-title">Developers</h2>
+                      <p class="developers_desc">Tranquilo is offering all developers around the globe to use our database for their e-Commerce web development.
+                      With our API endpoints, developers can have the list of properties and deals from our comprehensive database</p>
+                        <br>
+                        <p class="developers_desc">Without having to register, everyone can be a developers and start using our database.</p>
+                        <br><br>
+                        <button class="btn btn-lg btn-get-started" onclick="toApiDoc()">Get Started <b>></b></button>
                     </div>
                 </div>
+
             </div>
         </div>        
     </section>
+
 
     <br><br><br>
 
@@ -106,5 +101,14 @@
     @include('layouts.tranquilo-footer')
 
     @include('layouts.tranquilo-core-scripts')
+
+    <script>
+        function toApiDoc(){
+
+            var url = '{{ url('/apidoc') }}';
+
+            window.location.replace(url);
+        }
+    </script>
 </body>
 </html>

@@ -23,7 +23,7 @@ class AdminLoginController extends Controller
             // Authentication passed...
 
             // echo "YOU ARE AUTHENTICATED NOW YOU ARE LOGGED IN INTO THE SYSTEM";+
-            return redirect()->intended('dashboard');
+            return redirect()->intended('admin/dashboard');
 
         }else{
 

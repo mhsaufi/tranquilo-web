@@ -305,7 +305,7 @@ class PropertyController extends Controller
 
         $model_id = $request->input('m');
 
-         $model = Db::table('tranquilo_model')
+        $model = Db::table('tranquilo_model')
                     ->where('m_id',$model_id)
                     ->join('tranquilo_users','tranquilo_model.m_owner','=','tranquilo_users.id')
                     ->join('tranquilo_state','tranquilo_model.m_state','=','tranquilo_state.state_id')

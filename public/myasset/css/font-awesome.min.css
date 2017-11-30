@@ -404,3 +404,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .icon-exclamation-circle:before {content: "\f06a";}
 .icon-ban:before {content: "\f05e";}
 .icon-photo:before {content: "\f03e";}
+.icon-close:before{content: "\f00d";}
+.icon-retweet:before {content: "\f079";}
+.icon-users:before {content: "\f0c0";}
+.icon-window-restore:before {content: "\f2d2";}

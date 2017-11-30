@@ -180,6 +180,9 @@ class HomeController extends Controller
 
                 return view('auth.locked');
             }
+            if(Auth::user()->role == 1){
+                return redirect('admin/dashboard');
+            }
     }
 
     public function profile(){

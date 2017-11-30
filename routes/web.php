@@ -17,6 +17,12 @@ Route::get('/contactus',		'PublicController@contact');
 Route::get('/property',			'PublicController@property');
 Route::get('/pullnotificationnumber', 'SystemController@unreadCounter');
 Route::get('/viewmodelp',		'PublicController@viewProperty');
+Route::get('/developers', function(){
+	return view('developers');
+});
+Route::get('/ourpartner', function(){
+	return view('partners');
+});
 
 Auth::routes();
 
@@ -113,10 +119,32 @@ Route::get('/administrator',	'AdminController@register');
 Route::post('loginadmin',		'Auth\AdminLoginController@authenticate');
 Route::post('registeradmin', 	'Auth\AdminRegisterController@register');
 
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
-	Route::get('/dashboard',	'AdminController@home');
-	Route::get('/permission',	'AdminController@permission');
+	// Dashboard Tabs
+	Route::get('/dashboard',				'AdminController@home');
+
+	// User Tab
+	Route::get('/user',						'AdminController@user');
+
+	// Permission Tab
+	Route::get('/permission',				'AdminController@permission');
 	Route::post('/approvelandlordapply',	'AdminController@approveLandlord');
+
+	// Property tab
+	Route::get('/propertyrecord',			'AdminController@propertyRecords');
+	Route::get('/viewproperty',				'AdminController@viewProperty');
+
+	// Deals tab
+	Route::get('/dealsrecord',				'AdminController@dealRecords');
+
+});
+
+Route::group(['prefix'=>'api'],function(){
+
+	Route::get('/allmodel',			'APIController@getModelsList');
+	Route::get('/model',			'APIController@getModelSingle');
+	Route::get('/alldeal',			'APIController@getDealsList');
+	Route::get('/deal',				'APIController@getDealSingle');
 
 });
